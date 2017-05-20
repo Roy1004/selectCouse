@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="images/logo.png" type="image/png">
+    <title>选课</title>
+    <link href="css/style.default.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/childStyle.css">
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+</head>
+<body>
+<div class="container-fluid child-page">
+    <div class="panel panel-default user-info">
+        <div class="panel-body panel-body-nopadding">
+            <p>选课</p>
+            <div id="toolbar">
+                <!--<form class="form-inline" role="form">-->
+                <div class="row">
+                    <div class="right col-md-6">
+                        <input type="text" name="tname" id="tname" class="input-sm col-md-6" placeholder="教师姓名" autocomplete="off">
+                        <button class="btn btn-primary" id="search1"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                    </div>
+                    <div class="right col-md-6">
+                        <input type="text" name="cname" id="cname" class="input-sm col-md-6" placeholder="课程名称" autocomplete="off">
+                        <button class="btn btn-primary" id="search2"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                    </div>
+                </div>
+                <!--</form>-->
+            </div>
+            <table class="table table-hover table-condensed table-no-bordered" id="table1"></table>
+            <button class="btn btn-default btn-sm" id="save">提交</button>
+            <div class="mb30"></div>
+            <p>查看已选课程</p>
+            <table class="table table-hover table-condensed table-no-bordered" id="table2"></table>
+            <button class="btn btn-default btn-sm" id="del">退课</button>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+        //2.初始化Button的点击事件
+        /* var oButtonInit = new ButtonInit();
+         oButtonInit.Init(); */
+    });
+
+    $("#search1").click(function () {
+        if($('#tname').val()==""){
+            alert("请输入查询条件!");
+        }else{
+            $('#table1').bootstrapTable('refresh');
+        }
+    });
+    $("#search2").click(function () {
+        if($('#cname').val()==""){
+            alert("请输入查询条件!");
+        }else{
+            $('#table1').bootstrapTable('refresh');
+        }
+    });
+    var TableInit = function () {
+        var oTableInit = new Object();
+        //初始化Table
+        oTableInit.Init = function () {
+
+            $('#table1').bootstrapTable({
+                url: '',
+                method: 'post',
+                cache: false,//禁止缓存
+                dataType: "json",
+                toolbar: '#toolbar', // 工具按钮用哪个容器
+                striped: false,//禁止条纹显示
+                clickToSelect: true, //点击行就选中
+                showColumns: true,  //显示隐藏列
+                minimumCountColumns: 2,          //最少允许的列数
+                showRefresh: true,  //显示刷新按钮
+                singleSelect: true, //复选框只能选择一条记录
+                pagination: true, //分页
+                sidePagination: "server", //服务端处理分页
+                pageNumber: 1,   //初始化加载第一页，默认第一页
+                pageSize: 10,   //每页的记录行数（*）
+                pageList: [10, 20], //可供选择的每页的行数（*）
+                locale: 'zh-CN', //国际化
+                queryParams: oTableInit.queryParams,//传递参数（*）
+                queryParamsType: 'limit', //类型
+                showToggle : true,// 是否显示详细视图和列表视图的切换按钮
+                cardView : false, // 是否显示详细视图
+        columns: [
+            {
+                checkbox:true
+            }, //复选框
+            {
+                title: '课程号',
+                field: 'cid',
+                align: 'center',
+                valign: 'middle'
+            },
+            {
+                title: '课程名称',
+                field: 'cname',
+                align: 'center',
+                valign: 'middle'
+            },
+            {
+                title: '授课教师',
+                field: 'tname',
+                align: 'center'
+            },
+            {
+                title: '开课时间',
+                field: 'start',
+                align: 'center'
+            },
+            {
+                title: '结课时间',
+                field: 'end',
+                align: 'center'
+            },
+            {
+                title: '上课时间',
+                field: 'ctime',
+                align: 'center'
+            },
+            {
+                title: '上课地点',
+                field: 'place',
+                align: 'center'
+            },
+            {
+                title: '总容量',
+                field: 'total',
+                align: 'center'
+            },
+            {
+                title: '已选人数',
+                field: 'selected',
+                align: 'center'
+            },
+            {
+                title: '剩余人数',
+                field: 'remain',
+                align: 'center'
+            }
+         ]
+   });
+   $('#table2').bootstrapTable({
+        url: "",
+        method: 'post',
+        cache: false,//禁止缓存
+        dataType: "json",
+        striped: false,//禁止条纹显示
+        clickToSelect: true, //点击行就选中
+        singleSelect:true,
+        showColumns: true,  //显示隐藏列
+        minimumCountColumns: 2,          //最少允许的列数
+        showRefresh: true,  //显示刷新按钮
+        pagination: true, //分页
+        sidePagination: "server", //服务端处理分页
+        pageNumber:1,   //初始化加载第一页，默认第一页
+        pageSize: 10,   //每页的记录行数（*）
+        pageList: [10, 20],
+        //可供选择的每页的行数（*）
+        locale:'zh-CN', //国际化/*  queryParams: queryParams, //查询参数
+//        search:true,
+        showToggle :true, // 是否显示详细视图和列表视图的切换按钮
+        cardView : false,
+        // 是否显示详细视图
+        columns: [
+            {
+                checkbox: true
+            },
+            {
+                title: '课程号',
+                field: 'cid',
+                align: 'center',
+                valign: 'middle'
+            },
+            {
+                title: '课程名称',
+                field: 'cname',
+                align: 'center',
+                valign: 'middle'
+            },
+            {
+                title: '授课教师',
+                field: 'tname',
+                align: 'center'
+            },
+            {
+                title: '开课时间',
+                field: 'start',
+                align: 'center'
+            },
+            {
+                title: '结课时间',
+                field: 'end',
+                align: 'center'
+            },
+            {
+                title: '上课时间',
+                field: 'ctime',
+                align: 'center'
+            },
+            {
+                title: '上课地点',
+                field: 'place',
+                align: 'center'
+            }
+        ]
+    });
+    };
+        //得到查询的参数
+        oTableInit.queryParams = function (params) {
+            var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                limit: params.limit, //页面大小
+                offset: params.offset, //页码
+                tname: $("#tname").val(),
+                cname: $("#cname").val(),
+                maxrows: params.limit,
+                pageindex:params.pageNumber
+            };
+            return temp;
+        };
+        return oTableInit;
+    };
+  $("#sava").click(function () {
+       Save();
+      $('#table1').bootstrapTable('refresh');
+      $('#table2').bootstrapTable('refresh');
+  });
+    $("#del").click(function () {
+        Del();
+        $('#table1').bootstrapTable('refresh');
+        $('#table2').bootstrapTable('refresh');
+    });
+    function Save() {
+        var row=$("#table1").bootstrapTable("getSelections");
+        if(row.length!=1){
+            alert("请选课一门课程!")
+        }else{
+            $.ajax({
+                type:"post",
+                url:"",
+                data:JSON.stringify(row),
+                success:function (result) {
+                    if(result.errorMsg){
+                        alert(result.errorMsg);
+                        return;
+                    }else{
+                       alert("保存成功！");
+                       // $("#user-table").datagrid("reload");
+                    }
+                }
+            })
+        }
+    }
+    function Del() {
+        var row = $('#table2').bootstrapTable('getSelections');
+        if(row.length!=1){
+            alert("请选择一条记录");
+        }
+        else{
+            $.ajax({
+                type:"DELETE",
+                url:'',
+                data:JSON.stringify(row),
+                dataType: 'json',
+                success:function(result) {
+                    if (result.errorMsg) {
+                      alert(result.errorMsg);
+                        return;
+                    } else {
+                      alert("退课成功！");
+                    }
+                }
+            })
+        }
+    }
+</script>
+</body>
+</html>

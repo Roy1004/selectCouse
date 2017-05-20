@@ -1,0 +1,13 @@
+.headermenu .wel-label{
+padding: 12px 10px; line-height: 21px;}
+html:-moz-full-screen {
+    background: #1d2939;
+}
+
+html:-webkit-full-screen {
+    background: #1d2939;
+}
+
+html:fullscreen {
+    background: #1d2939;
+}

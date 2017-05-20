@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="images/logo.png" type="image/png">
+    <title>学生个人信息</title>
+    <link href="css/style.default.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/childStyle.css">
+</head>
+<body>
+<div class="container-fluid child-page">
+    <div class="user-info panel panel-default">
+         <div class="panel-heading">
+            <h3>个人基本信息：</h3>
+         </div>
+         <div class="panel-body panel-body-nopadding">
+             <form class="form-horizontal form-bordered" role="form">
+                 <ul class="list-group">
+                     <li class="list-group-item"><label>学号</label><span id="sid"></span></li>
+                     <li class="list-group-item"><label>姓名</label><span id="sname"></span></li>
+                     <li class="list-group-item"><label>性别</label><span id="ssex"></span></li>
+                     <li class="list-group-item"><label>年级</label><span id="grade"></span></li>
+                     <li class="list-group-item"><label>学院</label><span id="xb"></span></li>
+                     <li class="list-group-item"><label>专业</label><span id="zymc"></span></li>
+                     <li class="list-group-item"><label>班级</label><span id="bj"></span></li>
+                 </ul>
+             </form>
+         </div>
+    </div>
+    <div class="user-info panel panel-default">
+        <div class="panel-heading">
+            <h3>留言板：</h3>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+            <form class="form-horizontal form-bordered" role="form">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">学号：</label>
+                    <div class="col-md-4">
+                        <input type="text" placeholder="学号"  class="form-control sid" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">姓名：</label>
+                    <div class="col-md-4">
+                        <input type="text" placeholder="姓名" class="form-control sname" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="smessage">留言：</label>
+                    <div class="col-md-7">
+                        <textarea maxlength="200" placeholder="最多输入200个字..." class="form-control smessage" id="smessage"  rows="5"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <button class="btn btn-primary submit" id="submit">提交</button>&nbsp;
+                    <button class="btn btn-default reset" id="reset">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+      $(function () {
+          $.ajax(
+              {
+                  type:'get',
+                  url:'',
+                  dataType:'json',
+                  success:function (data) {
+                  // var json = eval("("+data+")");//将json类型字符串转换为json对象
+                      $("#sid").text(json[0].sid);
+                      $("#sname").text(json[0].sname);
+                      $("#ssex").text(json[0].ssex);
+                      $("#xb").text(json[0].xb);
+                      $("#zymc").text(json[0].zymc);
+                      $("#grade").text(json[0].grade);
+                  },
+                  error:function () {
+                  }
+              }
+              )
+      });
+      $("#reset").click(function () {
+          $(".sid").val("");
+          $(".sname").val("");
+          $("#smessage").val("");
+      });
+      $("#submit").click(function () {
+          var sid=$.trim($(".sid").val());
+          var sname=$(".sname").val();
+          var smessage=$("#smessage").val();
+          if(sid=="" || sname=="" || smessage=="")
+          {alert("请将信息填写完整!");return false;}
+          $.ajax(
+              {
+                  type:'post',
+                  url:'',
+                  dataType:'json',
+                  data:{
+                      id:sid,
+                      name:sname,
+                      message:smessage
+                  },
+                  success:function (data) {
+                      if(data==1){
+                         alert("提交成功!")
+                      }else{
+                          alert("提交失败!")
+                      }
+                  }
+              }
+          )
+      })
+</script>
+</body>
+</html>

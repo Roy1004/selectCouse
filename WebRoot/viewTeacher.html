@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="images/logo.png" type="image/png">
+    <title>查看教师信息</title>
+    <link href="css/style.default.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/childStyle.css">
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+    <style type="text/css">
+        .list-group{margin-bottom: 0;}
+        .list-group-item{padding:5px 15px;}
+        .modal-header,.modal-footer{padding: 5px;}
+    </style>
+</head>
+<body>
+<div class="container-fluid child-page">
+    <div class="panel panel-default user-info">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="right col-md-4">
+                    <input type="text" name="tid" id="tid" class="col-md-6 input-sm" placeholder="工号" autocomplete="off">
+                    <button class="btn btn-primary" id="search"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+            <div id="toolbar">
+                <div class="row">
+                    <div class="right col-md-12">
+                        <button class="btn btn-primary btn-sm" data-target="#modal1" data-toggle="modal" data-backdrop="static" id="add"><span class="glyphicon glyphicon-plus style"></span>添加</button>
+                        <button class="btn btn-info btn-sm" data-target="#modal2" data-toggle="modal" data-backdrop="static" id="change"><span class="glyphicon glyphicon-pencil style"></span>修改</button>
+                        <button class="btn btn-warning btn-sm" id="del"><span class="glyphicon glyphicon-trash style"></span>删除</button>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-hover table-condensed" id="table1">
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="Modal1Label">添加教师信息：</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal form-bordered" role="form" id="addInfo">
+                        <ul class="list-group">
+                            <li class="list-group-item"><label class="col-md-3">工号</label><input type="text" name="tid" id="tid1"></li>
+                            <li class="list-group-item"><label class="col-md-3">姓名</label><input type="text" name="tname" id="tname1"></li>
+                            <li class="list-group-item"><label class="col-md-3">性别</label><input type="radio" name="tsex" value="0">男&nbsp;<input type="radio" name="tsex" value="1">女</li>
+                            <li class="list-group-item"><label class="col-md-3">所授课程名称</label><input type="text" name="sklb" id="sklb1"></li>
+                            <li class="list-group-item"><label class="col-md-3">权限</label><input type="text" name="power" id="power1"></li>
+                            <li class="list-group-item"><label class="col-md-3">密码</label><input type="text" name="tpassword" id="tpassword1"></li>
+                        </ul>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="save1">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="Modal1Labe2">修改教师信息：</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal form-bordered" role="form" id="updateInfo">
+                        <ul class="list-group">
+                            <li class="list-group-item"><label class="col-md-3">工号</label><input type="text" name="tid" id="tid2"></li>
+                            <li class="list-group-item"><label class="col-md-3">姓名</label><input type="text" name="tname" id="tname2"></li>
+                            <li class="list-group-item"><label class="col-md-3">性别</label><input type="radio" name="tsex" value="0">男&nbsp;<input type="radio" name="tsex" value="1">女</li>
+                            <li class="list-group-item"><label class="col-md-3">所授课程名称</label><input type="text" name="sklb" id="sklb2"></li>
+                            <li class="list-group-item"><label class="col-md-3">权限</label><input type="text" name="" id="power2"></li>
+                            <li class="list-group-item"><label class="col-md-3">密码</label><input type="text" name="tpassword" id="tpassword2"></li>
+                        </ul>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="save2">保存</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table-zh-CN.min.js"></script>
+<script src="js/bootstrap-table-export.js"></script>
+<script src="js/tableExport.js"></script>
+<script src="js/jquery.serializejson.js"></script>
+<script src="js/jquery.formautofill.min.js"></script>
+<script type="text/javascript">
+   $(function () {
+       //1.初始化Table
+       var oTable = new TableInit();
+       oTable.Init();
+
+       //2.初始化Button的点击事件
+       /* var oButtonInit = new ButtonInit();
+        oButtonInit.Init(); */
+   });
+  $("#search").click(function () {
+      if ($("#tid").val()==""){
+          alert("请输入查询条件!");
+      }else {
+          $('#table1').bootstrapTable('refresh');
+      }
+  });
+
+   var TableInit = function () {
+       var oTableInit = new Object();
+       //初始化Table
+       oTableInit.Init = function () {
+           $('#table1').bootstrapTable({
+               url: "",
+               method: 'post',
+               cache: false,//禁止缓存
+               dataType: "json",
+               toolbar: '#toolbar',
+               striped: false,//禁止条纹显示
+               clickToSelect: true, //点击行就选中
+               showColumns: true,  //显示隐藏列
+               minimumCountColumns: 2,          //最少允许的列数
+               showRefresh: true,  //显示刷新按钮
+               /* singleSelect: false, //复选框只能选择一条记录*/
+               pagination: true, //分页
+               sidePagination: "server", //服务端处理分页
+               /* showPaginationSwitch: false,//是否显示分页数*/
+               pageNumber: 1,   //初始化加载第一页，默认第一页
+               pageSize: 10,   //每页的记录行数（*）
+               pageList: [10, 20], //可供选择的每页的行数（*）
+               locale: 'zh-CN', //国际化
+               uniqueId: "cid",
+               queryParams: oTableInit.queryParams,//传递参数（*）
+               queryParamsType: 'limit', //类型*/
+//                search:true,
+                showToggle : true, // 是否显示详细视图和列表视图的切换按钮
+                cardView : false, // 是否显示详细视图
+               showExport: true,                     //是否显示导出
+               exportDataType: "basic", //basic'导出当前页, 'all'导出全部, 'selected'导出选中项.
+        columns: [
+            {   field:'', title:'',
+                checkbox:true
+            }, //复选框
+            {
+                title: '工号',
+                field: 'tid',
+                align: 'center',
+                valign: 'middle'
+            },
+            {
+                title: '姓名',
+                field: 'tname',
+                align: 'center'
+                ,
+                valign: 'middle'
+            },
+            {
+                title: '性别',
+                field: 'tsex',
+                align: 'center'
+            },
+            {
+                title: '所教课程名称',
+                field: 'sklb',
+                align: 'center'
+            },
+            {
+                title: '权限',
+                field: 'power',
+                align: 'center'
+            },
+            {
+                title: '密码',
+                field: 'tpassword',
+                align: 'center'
+            }
+        ]
+    });
+    };
+       oTableInit.queryParams = function (params) {
+           var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+               limit: params.limit, //页面大小
+               offset: params.offset, //页码
+               tid: $("#tid").val(),
+               maxrows: params.limit,
+               pageindex:params.pageNumber
+           };
+           return temp;
+       };
+       return oTableInit;
+   };
+ //添加教师信息
+    $("#save1").click(function () {
+        var tid=$("#tid1").val();
+        var tname=$("#tname1").val();
+        var tsex=$("input[name='tsex']:checked").val();
+        var sklb=$("#sklb1").val();
+        var power=$("#power1").val();
+        var tpassword=$("#tpassword1").val();
+        if(tid=="" || tname=="" || tsex==null || sklb=="" || bj=="" || power=="" || tpassword==""){
+            alert("信息填写不完整!");
+            return;
+        }else{
+            $.ajax({
+                type:"post",
+                url:"",
+                data:JSON.stringify( $('#addInfo').serializeJSON()),
+                dataType:"json",
+                success:function (result) {
+                    if(result.errorMsg){
+                        alert(result.errorMsg);
+                        return;
+                    }else{
+                        alert("添加成功！");
+                        $("#modal2").hide();
+                        $('#table1').bootstrapTable('refresh');
+                    }
+                }
+            })
+        }
+    });
+   $("#del").click(function () {
+       var rows= $('#table1').bootstrapTable('getSelections');
+       if (rows.length==0){
+           alert("请选择你要删除的学生!");
+           return;
+       }
+       var r=confirm("您确认要删掉这"+rows.length+"条教师信息吗？");
+       if(r){
+           for(i=0;i<rows.length;i++){
+               $.ajax({
+                       type: 'delete',
+                       url:'api/illInfo/'+row[i]['tid'],
+                   }
+               )
+           };
+           $('#table1').bootstrapTable('refresh');
+           /* $.ajax(
+            {
+            type:"DELETE",
+            url:"",
+            data:JSON.stringify(rows),
+            success:function (reselt) {
+            if(result.errorMsg){
+            alert(result.errorMsg);
+            }else{
+            alert("您已成功删除<font color=red>"+selectedRows.length+"</font>条数据！");
+            $('#table1').bootstrapTable('refresh');
+            }
+            }
+            }
+            )*/
+       }
+   });
+   $("#change").click(function () {
+       var rows = $('#table1').bootstrapTable('getSelections');
+       if(rows.length!=1){
+           alert("请选择一个教师!");
+           $("#change").attr("data-target","")
+           return;
+       }else{
+           $("#change").attr("data-target","#modal2")
+           formAutofll("updateInfo",rows[0]);
+       }
+   })
+   $("#save2").click(function () {
+       $.ajax({
+           type:"post",
+           url:"",
+           data:JSON.stringify( $('#updateInfo').serializeJSON()),
+           dataType:"json",
+           success:function (result) {
+               if(result.errorMsg){
+                   alert(result.errorMsg);
+                   return;
+               }else{
+                   alert("修改成功！");
+                   $("#modal2").hide();
+                   $('#table1').bootstrapTable('refresh');
+               }
+           }
+       })
+   });
+</script>
+</body>
+</html>

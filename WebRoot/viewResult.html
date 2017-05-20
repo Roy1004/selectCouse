@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="images/logo.png" type="image/png">
+    <title>查看成绩</title>
+    <link href="css/style.default.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/childStyle.css">
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+</head>
+<body>
+<div class="container-fluid child-page">
+    <div class="panel panel-default user-info">
+        <div class="panel-body panel-body-nopadding">
+            <p>查看课程成绩</p>
+            <div id="toolbar">
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <label for="year" class="control-label">学年</label>
+                        <select class="form-control" name="year" id="year">
+                            <option value="0"></option>
+                            <option value="1">2013-2014</option>
+                            <option value="2">2014-2015</option>
+                            <option value="3">2015-2016</option>
+                            <option value="4">2016-2017</option>
+                        </select>
+                        <label for="semester" class="control-label">学期</label>
+                        <select class="form-control" name="semester" id="semester">
+                            <option value="0"></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                        <button class="btn btn-primary" id="search"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                    </div>
+                </form>
+            </div>
+            <table class="table table-hover table-condensed" id="table1">
+            </table>
+            <div class="mb30"></div>
+            <p>查看未通过课程成绩</p>
+            <table class="table table-hover table-condensed" id="table2">
+            </table>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+        $("#search").click(function () {
+            if($('#year').val()==0 || $('#semester').val()==0){
+                alert("请输入查询条件!");
+            }else{
+            $('#table1').bootstrapTable('refresh');
+            }
+        });
+        //2.初始化Button的点击事件
+        /* var oButtonInit = new ButtonInit();
+         oButtonInit.Init(); */
+    });
+
+var TableInit = function () {
+    var oTableInit = new Object();
+    //初始化Table
+    oTableInit.Init = function () {
+        $('#table1').bootstrapTable({
+            url: "",
+            method: 'post',
+            cache: false,//禁止缓存
+            dataType: "json",
+            toolbar: '#toolbar', // 工具按钮用哪个容器
+            striped: false,//禁止条纹显示
+            clickToSelect: true, //点击行就选中
+            showColumns: true,  //显示隐藏列
+            minimumCountColumns: 2,          //最少允许的列数
+            showRefresh: true,  //显示刷新按钮
+//            singleSelect: true, //复选框只能选择一条记录
+            pagination: true, //分页
+            sidePagination: "server", //服务端处理分页
+            showPaginationSwitch: false,//是否显示分页数
+            pageNumber: 1,   //初始化加载第一页，默认第一页
+            pageSize: 10,   //每页的记录行数（*）
+            pageList: [10, 20], //可供选择的每页的行数（*）
+            locale: 'zh-CN', //国际化
+            queryParams: oTableInit.queryParams,//传递参数（*）
+            queryParamsType: 'limit', //类型
+//        search:true,
+            showToggle :true, // 是否显示详细视图和列表视图的切换按钮
+            cardView :false, // 是否显示详细视图
+            columns: [
+    {
+        title: '学年',
+        field: 'year',
+        align: 'center',
+    },
+    {
+        title: '学期',
+        field: 'semester',
+        align: 'center',
+    },
+    {
+        title: '课程号',
+        field: 'cid',
+        align: 'center'
+    },
+    {
+        title: '课程名称',
+        field: 'cname',
+        align: 'center'
+    },
+    {
+        title: '授课教师',
+        field: 'tname',
+        align: 'center'
+    },
+    {
+        title: '成绩',
+        field: 'mark',
+        align: 'center'
+    }
+    ]
+    });
+        $('#table2').bootstrapTable({
+            url: "",
+            method: 'post',
+            cache: false,//禁止缓存
+            dataType: "json",
+            striped: false,//禁止条纹显示
+            clickToSelect: true, //点击行就选中
+            showColumns: true,  //显示隐藏列
+            minimumCountColumns: 2,          //最少允许的列数
+            showRefresh: true,  //显示刷新按钮
+            /* singleSelect: true, //复选框只能选择一条记录*/
+            pagination: true, //分页
+            sidePagination: "server", //服务端处理分页
+            /* showPaginationSwitch: false,//是否显示分页数*/
+            pageNumber: 1,   //初始化加载第一页，默认第一页
+            pageSize: 10,   //每页的记录行数（*）
+            pageList: [10, 20], //可供选择的每页的行数（*）
+            locale: 'zh-CN', //国际化
+           /* queryParams: queryParams, //查询参数
+            queryParamsType: 'limit', //类型*/
+//         search:true,
+            showToggle :true, // 是否显示详细视图和列表视图的切换按钮
+            cardView :false, // 是否显示详细视图
+            columns: [
+            {
+                title: '学年',
+                field: 'year',
+                align: 'center'
+            },
+            {
+                title: '学期',
+                field: 'semester',
+                align: 'center'
+            },
+            {
+                title: '课程号',
+                field: 'cid',
+                align: 'center'
+            },
+            {
+                title: '课程名称',
+                field: 'cname',
+                align: 'center'
+            },
+            {
+                title: '授课教师',
+                field: 'tname',
+                align: 'center'
+            },
+            {
+                title: '成绩',
+                field: 'mark',
+                align: 'center'
+            },
+        ]
+    });
+    };
+    //得到查询的参数
+
+    oTableInit.queryParams = function (params) {
+        var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+            limit: params.limit, //页面大小
+            offset: params.offset, //页码
+            year: $("#year").val(),
+            semester: $("#semester").val(),
+            maxrows: params.limit,
+            pageindex:params.pageNumber
+        };
+        return temp;
+    };
+    return oTableInit;
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="images/logo.png" type="image/png">
+<title>登录</title>
+<link href="css/style.default.css" rel="stylesheet">
+<link href="css/bootstrap-override.css" rel="stylesheet">
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<style type="text/css">
+.signin-info h1 {
+	font-size: 40px;
+}
+
+.checkInput {
+	width: 50%;
+	height: 25px;
+	float: left;
+}
+
+.showCode {
+	display: block;
+	float: left;
+	margin-top: 15px;
+	margin-left: 10px;
+	padding: 0 5px;
+	width: 30%;
+	background-color: #8F8584;
+	color: #6DFCFF;
+	cursor: pointer;
+	letter-spacing: 3px;
+}
+
+input:focus::-webkit-input-placeholder {
+	color: transparent;
+}
+/* Mozilla Firefox 4 to 18 */
+input:focus:-moz-placeholder {
+	color: transparent;
+}
+/* Mozilla Firefox 19+ */
+/* Internet Explorer 10+ */
+.hb {
+	box-shadow: 8px 8px 6px #c0c0c0;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+</style>
+</head>
+
+<body class="signin">
+	<section>
+		<div class="signinpanel">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="signin-info">
+						<div class="logopanel">
+							<h1>体育选课系统</h1>
+						</div>
+						<!-- logopanel -->
+					</div>
+					<!-- signin0-info -->
+				</div>
+				<!-- col-sm-7 -->
+			</div>
+			<div class="row">
+				<div class="col-md-6 nopadding">
+					<img src="images/timg.jpg" class="hb"
+						style="width: 100%;height: 100%;">
+				</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-5">
+					<form id="login">
+						<h5 class="nomargin">登陆到你的账户：</h5>
+						<input type="text" name="username" id="username"
+							class="form-control uname" placeholder="用户名" /> <input
+							type="password" name="password" id="password"
+							class="form-control pword" placeholder="密码" />
+						<div>
+							<input type="text" name="checkCode" id="Code"
+								class="form-control checkInput" placeholder="验证码"
+								autocomplete="off"> <span class="showCode" id="showCode"></span>
+						</div>
+						<div style="clear: both;">
+							<input type="radio" name="radio" value="1" id="admin"><label
+								for="admin">管理员</label> <input type="radio" name="radio"
+								value="2" id="teacher"><label for="teacher">教师</label>&nbsp;&nbsp;
+							<input type="radio" name="radio" value="3" id="student"
+								checked="checked"><label for="student">学生</label>
+						</div>
+						<input type="button" id="button1" class="btn btn-success btn-block" value="登录">
+					</form>
+				</div>
+				<!-- col-sm-5 -->
+			</div>
+			<!-- row -->
+		</div>
+		<!-- signin -->
+	</section>
+
+
+	<script type="text/javascript">
+		//创建验证码
+		$(function() {
+			var code;
+			var codeLength = 5;
+			var codeArray = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b',
+					'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+					'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+					'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+					'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+					'Y', 'Z');
+			function createCode() {
+				code = "";//每次点击将code清空
+				var codeNum;
+				for (var i = 0; i < codeLength; i++) {
+					codeNum = Math.floor(Math.random() * 62);
+					code += codeArray[codeNum];
+				}
+				$(".showCode").text(code);
+			}
+			createCode();
+			$(".showCode").click(function() {
+				createCode();
+			});
+			//为登录按钮绑定enter事件
+			$(document).keydown(function(event) {
+				if (event.keyCode == 13) {
+					$("#button1").click();
+				}
+			});
+		});
+			$("#button1").click(function() {
+				var userName = $.trim($("#username").val());
+				var passWord = $("#password").val();
+				var checkCode = $.trim($("#Code").val());
+				var showCode = $("#showCode").text();
+			    var checkedValue = $("input[type='radio']:checked").val();
+				if (userName == "") {
+					alert("请输入用户名!");
+					// showDialog("请输入用户名!");
+					return false;
+				} else if (passWord == "") {
+					alert("请输入密码!");
+					return false;
+				} else if (checkCode == "") {
+					alert("请输入验证码!");
+					return false;
+				} else if (checkCode.toUpperCase() != showCode.toUpperCase()) {
+					alert("验证码错误!");
+					createCode();
+					return false;
+				}else{ 
+		
+					if(checkedValue==1 || checkedValue==2){
+						//alert("老师");			
+						$.ajax({				
+							type : "post",
+							url : "api/user/Tealogin/"+checkedValue,
+							data : $('#login').serialize(),
+							success : function(data) {
+								if (data == undefined) {
+									alert("用户名或密码错误");
+								} else {
+								 $.ajax({
+										url : 'api/user/Teaau=' + data,
+										type : 'get',
+										success : function(data2) {
+											$.removeCookie('Tid');
+					                        $.removeCookie('Name');			                            
+				                            $.removeCookie('Power');
+				                            $.cookie('Tid', data2["tid"], {path: '/'});
+				                            $.cookie('Name', data2["tname"], {path: '/'});
+				                            $.cookie('Power', data2["power"], {path: '/'});
+				                            
+				                            if($.cookie("Power")==1)
+											  window.location.href = "admin.html";
+				                            else
+				                              window.location.href = "teacherMain.html";	
+										}
+									});	
+								};
+							}//sucess
+						});//ajax  
+						
+					}	
+					else if (checkedValue==3){
+						 $.ajax({				
+								type : "post",
+								url : "api/user/Stulogin",
+								data : $('#login').serialize(),
+								success : function(data) {
+									if (data == undefined) {
+										alert("用户名或密码错误");
+									} else {
+									 $.ajax({
+											url : 'api/user/Stuau=' + data,
+											type : 'get',
+											success : function(data2) {
+						                        $.removeCookie('Name');
+					                            $.removeCookie('Sid');
+					                            $.cookie('Sid', data2["sid"], {path: '/'});
+					                            $.cookie('Name', data2["sname"], {path: '/'});
+												window.location.href = "studentMain.html";
+											}
+										});	
+									};
+								}//sucess
+							});//ajax  
+					}
+					
+			 
+				} 
+			
+			});
+	</script>
+</body>
+</html>

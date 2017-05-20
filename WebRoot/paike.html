@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="images/logo.png" type="image/png">
+    <title>排课</title>
+    <link href="css/style.default.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/childStyle.css">
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+    <style type="text/css">
+        .height{height: 40px;}
+    </style>
+</head>
+<body>
+<div class="container-fluid child-page">
+    <div class="panel panel-default user-info">
+        <div class="panel-body panel-body-nopadding">
+            <div id="toolbar">
+                <div class="row">
+                    <div class="right col-md-12">
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal1" data-backdrop="static"><span class="glyphicon glyphicon-plus style"></span>添加</button>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-hover table-condensed" id="table1"></table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="Modal1Label">添加排课信息：</h4>
+            </div>
+            <div class="modal-body">
+                    <form class="form-horizontal form-bordered" role="form">
+                        <div class="row height">
+                            <div class="col-md-3"><label>系别</label></div>
+                            <div class="col-md-2"><label>星期</label></div>
+                            <div class="col-md-2"><label>节数</label></div>
+                            <div class="col-md-3"><label>学年</label></div>
+                            <div class="col-md-2"><label>学期</label></div>
+                        </div>
+                        <div class="row height">
+                            <div class="col-md-3"><label>基础医学院</label></div>
+                            <div class="col-md-2">
+                                <!--<label>星期</label>-->
+                                <select name="week">
+                                    <option value="1">星期一</option>
+                                    <option value="2">星期二</option>
+                                    <option value="3">星期三</option>
+                                    <option value="4">星期四</option>
+                                    <option value="5">星期五</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>节数</label>-->
+                                <select name="class">
+                                    <option value="1">1-2</option>
+                                    <option value="2">3-4</option>
+                                    <option value="3">5-6</option>
+                                    <option value="4">7-8</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <!--<label>学年</label>-->
+                                <select name="year">
+                                    <option value="1">2013-2014</option>
+                                    <option value="2">2014-2015</option>
+                                    <option value="3">2015-2016</option>
+                                    <option value="4">2016-2017</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>学期</label>-->
+                                <select name="semester">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row height">
+                            <div class="col-md-3"><label>药学院</label></div>
+                            <div class="col-md-2">
+                                <!--<label>星期</label>-->
+                                <select name="week">
+                                    <option value="1">星期一</option>
+                                    <option value="2">星期二</option>
+                                    <option value="3">星期三</option>
+                                    <option value="4">星期四</option>
+                                    <option value="5">星期五</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>节数</label>-->
+                                <select name="class">
+                                    <option value="1">1-2</option>
+                                    <option value="2">3-4</option>
+                                    <option value="3">5-6</option>
+                                    <option value="4">7-8</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <!--<label>学年</label>-->
+                                <select name="year">
+                                    <option value="1">2013-2014</option>
+                                    <option value="2">2014-2015</option>
+                                    <option value="3">2015-2016</option>
+                                    <option value="4">2016-2017</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>学期</label>-->
+                                <select name="semester">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row height">
+                            <div class="col-md-3"><label>信息工程学院</label></div>
+                            <div class="col-md-2">
+                                <!--<label>星期</label>-->
+                                <select name="week">
+                                    <option value="1">星期一</option>
+                                    <option value="2">星期二</option>
+                                    <option value="3">星期三</option>
+                                    <option value="4">星期四</option>
+                                    <option value="5">星期五</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>节数</label>-->
+                                <select name="class">
+                                    <option value="1">1-2</option>
+                                    <option value="2">3-4</option>
+                                    <option value="3">5-6</option>
+                                    <option value="4">7-8</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <!--<label>学年</label>-->
+                                <select name="year">
+                                    <option value="1">2013-2014</option>
+                                    <option value="2">2014-2015</option>
+                                    <option value="3">2015-2016</option>
+                                    <option value="4">2016-2017</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>学期</label>-->
+                                <select name="semester">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row height">
+                            <div class="col-md-3"><label>管理学院</label></div>
+                            <div class="col-md-2">
+                                <!--<label>星期</label>-->
+                                <select name="week">
+                                    <option value="1">星期一</option>
+                                    <option value="2">星期二</option>
+                                    <option value="3">星期三</option>
+                                    <option value="4">星期四</option>
+                                    <option value="5">星期五</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>节数</label>-->
+                                <select name="class">
+                                    <option value="1">1-2</option>
+                                    <option value="2">3-4</option>
+                                    <option value="3">5-6</option>
+                                    <option value="4">7-8</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <!--<label>学年</label>-->
+                                <select name="year">
+                                    <option value="1">2013-2014</option>
+                                    <option value="2">2014-2015</option>
+                                    <option value="3">2015-2016</option>
+                                    <option value="4">2016-2017</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>学期</label>-->
+                                <select name="semester">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row height">
+                            <div class="col-md-3"><label>人文学院</label></div>
+                            <div class="col-md-2">
+                                <!--<label>星期</label>-->
+                                <select name="week">
+                                    <option value="1">星期一</option>
+                                    <option value="2">星期二</option>
+                                    <option value="3">星期三</option>
+                                    <option value="4">星期四</option>
+                                    <option value="5">星期五</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>节数</label>-->
+                                <select name="class">
+                                    <option value="1">1-2</option>
+                                    <option value="2">3-4</option>
+                                    <option value="3">5-6</option>
+                                    <option value="4">7-8</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <!--<label>学年</label>-->
+                                <select name="year">
+                                    <option value="1">2013-2014</option>
+                                    <option value="2">2014-2015</option>
+                                    <option value="3">2015-2016</option>
+                                    <option value="4">2016-2017</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>学期</label>-->
+                                <select name="semester">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row height">
+                            <div class="col-md-3"><label>外国语学院</label></div>
+                            <div class="col-md-2">
+                                <!--<label>星期</label>-->
+                                <select name="week">
+                                    <option value="1">星期一</option>
+                                    <option value="2">星期二</option>
+                                    <option value="3">星期三</option>
+                                    <option value="4">星期四</option>
+                                    <option value="5">星期五</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>节数</label>-->
+                                <select name="class">
+                                    <option value="1">1-2</option>
+                                    <option value="2">3-4</option>
+                                    <option value="3">5-6</option>
+                                    <option value="4">7-8</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <!--<label>学年</label>-->
+                                <select name="year">
+                                    <option value="1">2013-2014</option>
+                                    <option value="2">2014-2015</option>
+                                    <option value="3">2015-2016</option>
+                                    <option value="4">2016-2017</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <!--<label>学期</label>-->
+                                <select name="semester">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary submit">保存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
+<script src="js/bootstrap-table-zh-CN.min.js"></script>
+<script src="js/bootstrap-table-export.js"></script>
+<script src="js/tableExport.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+
+        //2.初始化Button的点击事件
+        /* var oButtonInit = new ButtonInit();
+         oButtonInit.Init(); */
+    });
+
+    var TableInit = function () {
+        var oTableInit = new Object();
+        //初始化Table
+        oTableInit.Init = function () {
+            $('#table1').bootstrapTable({
+                url: "",
+                method: 'post',
+                cache: false,//禁止缓存
+                dataType: "json",
+                toolbar: '#toolbar', // 工具按钮用哪个容器
+                striped: false,//禁止条纹显示
+                clickToSelect: true, //点击行就选中
+                showColumns: true,  //显示隐藏列
+                minimumCountColumns: 2,          //最少允许的列数
+                showRefresh: true,  //显示刷新按钮
+                /* singleSelect: false, //复选框只能选择一条记录*!*/
+                pagination: true, //分页
+                sidePagination: "server", //服务端处理分页
+                showPaginationSwitch: false,//是否显示分页数
+                pageNumber: 1,   //初始化加载第一页，默认第一页
+                pageSize: 10,   //每页的记录行数（*）
+                pageList: [10, 20], //可供选择的每页的行数（*）
+                locale: 'zh-CN', //国际化
+                queryParams: oTableInit.queryParams,//传递参数（*）
+                queryParamsType: 'limit', //类型
+//        search:true,
+                showToggle : true,// 是否显示详细视图和列表视图的切换按钮
+                cardView :false, // 是否显示详细视图
+                showExport: true,                     //是否显示导出
+                exportDataType: "basic", //basic'导出当前页, 'all'导出全部, 'selected'导出选中项.
+                columns: [
+                    {
+                        title: '系别',
+                        field: 'xb',
+                        align: 'center',
+                    },
+                    {
+                        title: '星期',
+                        field: 'week',
+                        align: 'center',
+                    },
+                    {
+                        title: '节数',
+                        field: 'class',
+                        align: 'center'
+                    },
+                    {
+                        title: '学年',
+                        field: 'year',
+                        align: 'center'
+                    },
+                    {
+                        title: '学期',
+                        field: 'semester',
+                        align: 'center'
+                    }
+                ]
+            });
+        };
+        //得到查询的参数
+        oTableInit.queryParams = function (params) {
+            var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                limit: params.limit, //页面大小
+                offset: params.offset, //页码
+                maxrows: params.limit,
+                pageindex:params.pageNumber
+            };
+            return temp;
+        };
+        return oTableInit;
+    };
+</script>
+</body>
+</html>

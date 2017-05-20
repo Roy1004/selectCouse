@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="images/logo.png" type="image/png">
+    <title>查看选课信息</title>
+    <link href="css/style.default.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/childStyle.css">
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="css/bootstrap-editable.css">
+</head>
+<body>
+  <div class="container-fluid child-page">
+      <div class="panel panel-default user-info">
+          <div class="panel-body panel-body-nopadding">
+              <div id="toolbar">
+                  <form class="form-inline" role="form">
+                      <div class="form-group">
+                          <label for="year" class="control-label">学年</label>
+                          <select class="form-control" name="year" id="year">
+                              <option value="0"></option>
+                              <option value="1">2013-2014</option>
+                              <option value="2">2014-2015</option>
+                              <option value="3">2015-2016</option>
+                              <option value="4">2016-2017</option>
+                          </select>
+                          <label for="grade" class="control-label">年级</label>
+                          <select class="form-control" name="grade" id="grade">
+                              <option value="0"></option>
+                              <option value="1">2013</option>
+                              <option value="2">2014</option>
+                              <option value="3">2015</option>
+                              <option value="4">2016</option>
+                          </select>
+                          <label for="semester" class="control-label">学期</label>
+                          <select class="form-control" name="semester" id="semester">
+                              <option value="0"></option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                          </select>
+                          <button class="btn btn-primary" id="search"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                      </div>
+                  </form>
+              </div>
+              <table class="table table-hover table-condensed" id="table1">
+              </table>
+              <button class="btn btn-default btn-sm" id="submit1">确定</button>
+              <button class="btn btn-default btn-sm" id="submit2">提交</button>
+          </div>
+      </div>
+  </div>
+  <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-table.min.js"></script>
+  <script src="js/bootstrap-table-zh-CN.min.js"></script>
+  <script src="js/bootstrap-editable.min.js"></script>
+  <script src="js/bootstrap-table-editable.js"></script>
+  <script src="js/bootstrap-table-export.js"></script>
+  <script src="js/tableExport.js"></script>
+  <script type="text/javascript">
+      $(function () {
+          //1.初始化Table
+          var oTable = new TableInit();
+          oTable.Init();
+       /*   $("#year").change(function () {
+              localStorage.value = this.value;
+              localStorage.index = this.selectedIndex;
+          });*/
+          //2.初始化Button的点击事件
+          /* var oButtonInit = new ButtonInit();
+           oButtonInit.Init(); */
+      });
+      $("#search").click(function () {
+          if($('#year').val()==0 || $('#semester').val()==0 || $('#grade').val()==0){
+              alert("请输入查询条件!");
+          }else{
+              $('#table1').bootstrapTable('refresh');
+          }
+      });
+  var TableInit = function () {
+      var oTableInit = new Object();
+      //初始化Table
+      oTableInit.Init = function () {
+          var regMark=/^(\d{1}|[1-9]\d{1}|100)$/;
+//          $("#year").options[ localStorage.index ].selected = true;
+          $('#table1').bootstrapTable({
+              url: "",
+              method: 'post',
+              dataType: "json",
+              cache: false,//禁止缓存
+              editable:true,
+              onEditableSave: function (field, row, oldValue, $el) {//编辑保存事件四个参数field, row, oldValue, $el分别对应着当前列的名称、当前行数据对象、更新前的值、编辑的当前单元格的jQuery对象。
+                  $.ajax({
+                      type: "post",
+                      url: "",
+                      data: { strJson: JSON.stringify(row) },
+                      success: function (data, status) {
+                          /* if (status == "success") {
+                           alert("编辑成功");
+                           }*/
+                      },
+                      error: function () {
+
+                      }
+                  });
+              },
+              toolbar:'#toolbar',
+              striped: false,//禁止条纹显示
+              clickToSelect: true, //点击行就选中
+              showColumns: true,  //显示隐藏列
+              minimumCountColumns: 2,          //最少允许的列数
+              showRefresh: true,  //显示刷新按钮
+              singleSelect: true, //复选框只能选择一条记录
+              pagination: true, //分页
+              sidePagination: "server", //服务端处理分页
+              showPaginationSwitch: false,//是否显示分页数
+              pageNumber:1,   //初始化加载第一页，默认第一页
+              pageSize: 10,   //每页的记录行数（*）
+              pageList: [10, 20], //可供选择的每页的行数（*）
+             /* paginationPreText: "Previous",
+              paginationNextText: "Next",
+              paginationFirstText: "First",
+              paginationLastText: "Last",*/
+              uniqueId: "sid",   //每一行的唯一标识，一般为主键列
+              locale:'zh-CN', //国际化
+              queryParams: oTableInit.queryParams,//传递参数（*）
+              queryParamsType: "limit", //设置为"undefined",可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+                                            //设置为"limit",符合 RESTFul 格式的参数,可以获取limit, offset, search, sort, order
+//            search:true,
+              showToggle : true, // 是否显示详细视图和列表视图的切换按钮
+              cardView : false, // 是否显示详细视图
+              showExport: true,                     //是否显示导出
+              exportDataType: "basic", //basic'导出当前页, 'all'导出全部, 'selected'导出选中项.
+              columns: [
+                  {
+                      title: '学号',
+                      field: 'sid',
+                      align: 'center'
+                  },
+                  {
+                      title: '姓名',
+                      field: 'sname',
+                      align: 'center'
+                  },
+                  {
+                      title: '性别',
+                      field: 'ssex',
+                      align: 'center'
+                  },
+                  {
+                      title: '课程名称',
+                      field: 'canme',
+                      align: 'center'
+                  },
+                  {
+                      title: '系别',
+                      field: 'xb',
+                      align: 'center'
+                  },
+                  {
+                      title: '专业',
+                      field: 'zymc',
+                      align: 'center'
+                  },
+                  {
+                      title: '平时成绩',
+                      field: 'pmark',
+                      align: 'center',
+                      editable: {
+                          type: 'text',
+                          validate: function(value) {
+                              if($.trim(value) == '') {
+                                  return '成绩不可为空';
+                              }else if(!regMark.test(value)){
+                                  return '成绩区间1-100';
+                              }
+                          }
+                      }
+                  },
+                  {
+                      title: '考试成绩',
+                      field: 'emark',
+                      align: 'center',
+                      editable: {
+                          type: 'text',
+                          validate: function(value) {
+                              if($.trim(value) == '') {
+                                  return '成绩不可为空';
+                              }else if(!regMark.test(value)){
+                                  return '成绩区间1-100';
+                              }
+                          }
+                      }
+                  },
+                  {
+                      title: '最终成绩',
+                      field: 'mark',
+                      align: 'center'
+                  }
+              ]
+          });
+      };
+      //得到查询的参数
+
+      oTableInit.queryParams = function (params) {
+          var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+              limit: params.limit, //页面大小
+              offset: params.offset, //页码
+              year: $("#year").val(),
+              grade: $("#grade").val(),
+              semester: $("#semester").val(),
+              maxrows: params.limit,
+              pageindex:params.pageNumber
+          };
+          return temp;
+      };
+      return oTableInit;
+      };
+      $("#submit1").click(function () {
+
+      });
+      $("#submit2").click(function () {
+
+      });
+  </script>
+</body>
+</html>
