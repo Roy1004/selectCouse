@@ -3,13 +3,11 @@ package com.book.entity;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-/**
- * SortcourseId entity. @author MyEclipse Persistence Tools
- */
+
 @Embeddable
 public class SortcourseId implements java.io.Serializable {
 
-	// Fields
+	
 
 	private String xb;
 	private String week;
@@ -17,13 +15,13 @@ public class SortcourseId implements java.io.Serializable {
 	private String year;
 	private String semester;
 
-	// Constructors
+	
 
-	/** default constructor */
+	
 	public SortcourseId() {
 	}
 
-	/** full constructor */
+	
 	public SortcourseId(String xb, String week, String class_, String year,
 			String semester) {
 		this.xb = xb;
@@ -33,7 +31,7 @@ public class SortcourseId implements java.io.Serializable {
 		this.semester = semester;
 	}
 
-	// Property accessors
+	
 
 	@Column(name = "xb", nullable = false, length = 20)
 	public String getXb() {

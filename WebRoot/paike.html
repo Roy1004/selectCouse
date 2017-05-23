@@ -19,7 +19,8 @@
             <div id="toolbar">
                 <div class="row">
                     <div class="right col-md-12">
-                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal1" data-backdrop="static"><span class="glyphicon glyphicon-plus style"></span>添加</button>
+                        <button class="btn btn-primary btn-sm" id="add" data-toggle="modal" data-target="#modal1" data-backdrop="static"><span class="glyphicon glyphicon-plus style"></span>排课</button>
+                   <button class="btn btn-warning btn-sm" id="del"><span class="glyphicon glyphicon-trash style"></span>删除</button>
                     </div>
                 </div>
             </div>
@@ -35,7 +36,7 @@
                 <h4 class="modal-title" id="Modal1Label">添加排课信息：</h4>
             </div>
             <div class="modal-body">
-                    <form class="form-horizontal form-bordered" role="form">
+                    <form class="form-horizontal form-bordered" role="form" id="pkInfo">
                         <div class="row height">
                             <div class="col-md-3"><label>系别</label></div>
                             <div class="col-md-2"><label>星期</label></div>
@@ -44,228 +45,228 @@
                             <div class="col-md-2"><label>学期</label></div>
                         </div>
                         <div class="row height">
-                            <div class="col-md-3"><label>基础医学院</label></div>
+                            <div class="col-md-3"><input name="xb" value="基础医学院" class="xb" readonly="readonly"></div>
                             <div class="col-md-2">
                                 <!--<label>星期</label>-->
-                                <select name="week">
-                                    <option value="1">星期一</option>
-                                    <option value="2">星期二</option>
-                                    <option value="3">星期三</option>
-                                    <option value="4">星期四</option>
-                                    <option value="5">星期五</option>
+                                <select name="week" class="week">
+                                    <option value="星期一">星期一</option>
+                                    <option value="星期二">星期二</option>
+                                    <option value="星期三">星期三</option>
+                                    <option value="星期四">星期四</option>
+                                    <option value="星期五">星期五</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>节数</label>-->
-                                <select name="class">
-                                    <option value="1">1-2</option>
-                                    <option value="2">3-4</option>
-                                    <option value="3">5-6</option>
-                                    <option value="4">7-8</option>
+                                <select name="class" class="class">
+                                    <option value="1-2">1-2</option>
+                                    <option value="3-4">3-4</option>
+                                    <option value="5-6">5-6</option>
+                                    <option value="7-8">7-8</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <!--<label>学年</label>-->
-                                <select name="year">
-                                    <option value="1">2013-2014</option>
-                                    <option value="2">2014-2015</option>
-                                    <option value="3">2015-2016</option>
-                                    <option value="4">2016-2017</option>
+                                <select name="year" class="year">
+                                    <option value="2013-2014">2013-2014</option>
+                                    <option value="2014-2015">2014-2015</option>
+                                    <option value="2015-2016">2015-2016</option>
+                                    <option value="2016-2017">2016-2017</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>学期</label>-->
-                                <select name="semester">
+                                <select name="semester" class="semester">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row height">
-                            <div class="col-md-3"><label>药学院</label></div>
+                            <div class="col-md-3"><input name="xb" value="药学院" readonly="readonly"></div>
                             <div class="col-md-2">
                                 <!--<label>星期</label>-->
-                                <select name="week">
-                                    <option value="1">星期一</option>
-                                    <option value="2">星期二</option>
-                                    <option value="3">星期三</option>
-                                    <option value="4">星期四</option>
-                                    <option value="5">星期五</option>
+                                <select name="week" class="week">
+                                    <option value="星期一">星期一</option>
+                                    <option value="星期二">星期二</option>
+                                    <option value="星期三">星期三</option>
+                                    <option value="星期四">星期四</option>
+                                    <option value="星期五">星期五</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>节数</label>-->
-                                <select name="class">
-                                    <option value="1">1-2</option>
-                                    <option value="2">3-4</option>
-                                    <option value="3">5-6</option>
-                                    <option value="4">7-8</option>
+                                <select name="class" class="class">
+                                    <option value="1-2">1-2</option>
+                                    <option value="3-4">3-4</option>
+                                    <option value="5-6">5-6</option>
+                                    <option value="7-8">7-8</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <!--<label>学年</label>-->
-                                <select name="year">
-                                    <option value="1">2013-2014</option>
-                                    <option value="2">2014-2015</option>
-                                    <option value="3">2015-2016</option>
-                                    <option value="4">2016-2017</option>
+                                <select name="year" class="year">
+                                    <option value="2013-2014">2013-2014</option>
+                                    <option value="2014-2015">2014-2015</option>
+                                    <option value="2015-2016">2015-2016</option>
+                                    <option value="2016-2017">2016-2017</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>学期</label>-->
-                                <select name="semester">
+                                <select name="semester" class="semester">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row height">
-                            <div class="col-md-3"><label>信息工程学院</label></div>
+                            <div class="col-md-3"><input name="xb" value="信息工程学院" readonly="readonly"></div>
                             <div class="col-md-2">
                                 <!--<label>星期</label>-->
-                                <select name="week">
-                                    <option value="1">星期一</option>
-                                    <option value="2">星期二</option>
-                                    <option value="3">星期三</option>
-                                    <option value="4">星期四</option>
-                                    <option value="5">星期五</option>
+                                <select name="week" class="week">
+                                    <option value="星期一">星期一</option>
+                                    <option value="星期二">星期二</option>
+                                    <option value="星期三">星期三</option>
+                                    <option value="星期四">星期四</option>
+                                    <option value="星期五">星期五</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>节数</label>-->
-                                <select name="class">
-                                    <option value="1">1-2</option>
-                                    <option value="2">3-4</option>
-                                    <option value="3">5-6</option>
-                                    <option value="4">7-8</option>
+                                <select name="class" class="class">
+                                    <option value="1-2">1-2</option>
+                                    <option value="3-4">3-4</option>
+                                    <option value="5-6">5-6</option>
+                                    <option value="7-8">7-8</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <!--<label>学年</label>-->
-                                <select name="year">
-                                    <option value="1">2013-2014</option>
-                                    <option value="2">2014-2015</option>
-                                    <option value="3">2015-2016</option>
-                                    <option value="4">2016-2017</option>
+                                <select name="year" class="year">
+                                    <option value="2013-2014">2013-2014</option>
+                                    <option value="2014-2015">2014-2015</option>
+                                    <option value="2015-2016">2015-2016</option>
+                                    <option value="2016-2017">2016-2017</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>学期</label>-->
-                                <select name="semester">
+                                <select name="semester" class="semester">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row height">
-                            <div class="col-md-3"><label>管理学院</label></div>
+                            <div class="col-md-3"><input name="xb" value="管理学院" readonly="readonly"></div>
                             <div class="col-md-2">
                                 <!--<label>星期</label>-->
-                                <select name="week">
-                                    <option value="1">星期一</option>
-                                    <option value="2">星期二</option>
-                                    <option value="3">星期三</option>
-                                    <option value="4">星期四</option>
-                                    <option value="5">星期五</option>
+                                <select name="week" class="week">
+                                    <option value="星期一">星期一</option>
+                                    <option value="星期二">星期二</option>
+                                    <option value="星期三">星期三</option>
+                                    <option value="星期四">星期四</option>
+                                    <option value="星期五">星期五</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>节数</label>-->
-                                <select name="class">
-                                    <option value="1">1-2</option>
-                                    <option value="2">3-4</option>
-                                    <option value="3">5-6</option>
-                                    <option value="4">7-8</option>
+                                <select name="class" class="class">
+                                    <option value="1-2">1-2</option>
+                                    <option value="3-4">3-4</option>
+                                    <option value="5-6">5-6</option>
+                                    <option value="7-8">7-8</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <!--<label>学年</label>-->
-                                <select name="year">
-                                    <option value="1">2013-2014</option>
-                                    <option value="2">2014-2015</option>
-                                    <option value="3">2015-2016</option>
-                                    <option value="4">2016-2017</option>
+                                <select name="year" class="year">
+                                    <option value="2013-2014">2013-2014</option>
+                                    <option value="2014-2015">2014-2015</option>
+                                    <option value="2015-2016">2015-2016</option>
+                                    <option value="2016-2017">2016-2017</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>学期</label>-->
-                                <select name="semester">
+                                <select name="semester" class="semester">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row height">
-                            <div class="col-md-3"><label>人文学院</label></div>
+                            <div class="col-md-3"><input name="xb" value="人文学院" readonly="readonly"></div>
                             <div class="col-md-2">
                                 <!--<label>星期</label>-->
-                                <select name="week">
-                                    <option value="1">星期一</option>
-                                    <option value="2">星期二</option>
-                                    <option value="3">星期三</option>
-                                    <option value="4">星期四</option>
-                                    <option value="5">星期五</option>
+                                <select name="week" class="week">
+                                    <option value="星期一">星期一</option>
+                                    <option value="星期二">星期二</option>
+                                    <option value="星期三">星期三</option>
+                                    <option value="星期四">星期四</option>
+                                    <option value="星期五">星期五</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>节数</label>-->
-                                <select name="class">
-                                    <option value="1">1-2</option>
-                                    <option value="2">3-4</option>
-                                    <option value="3">5-6</option>
-                                    <option value="4">7-8</option>
+                                <select name="class" class="class">
+                                    <option value="1-2">1-2</option>
+                                    <option value="3-4">3-4</option>
+                                    <option value="5-6">5-6</option>
+                                    <option value="7-8">7-8</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <!--<label>学年</label>-->
-                                <select name="year">
-                                    <option value="1">2013-2014</option>
-                                    <option value="2">2014-2015</option>
-                                    <option value="3">2015-2016</option>
-                                    <option value="4">2016-2017</option>
+                                <select name="year" class="year">
+                                    <option value="2013-2014">2013-2014</option>
+                                    <option value="2014-2015">2014-2015</option>
+                                    <option value="2015-2016">2015-2016</option>
+                                    <option value="2016-2017">2016-2017</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>学期</label>-->
-                                <select name="semester">
+                                <select name="semester" class="semester">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row height">
-                            <div class="col-md-3"><label>外国语学院</label></div>
+                            <div class="col-md-3"><input name="xb" value="外国语学院" readonly="readonly"></div>
                             <div class="col-md-2">
                                 <!--<label>星期</label>-->
-                                <select name="week">
-                                    <option value="1">星期一</option>
-                                    <option value="2">星期二</option>
-                                    <option value="3">星期三</option>
-                                    <option value="4">星期四</option>
-                                    <option value="5">星期五</option>
+                                <select name="week" class="week">
+                                    <option value="星期一">星期一</option>
+                                    <option value="星期二">星期二</option>
+                                    <option value="星期三">星期三</option>
+                                    <option value="星期四">星期四</option>
+                                    <option value="星期五">星期五</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>节数</label>-->
-                                <select name="class">
-                                    <option value="1">1-2</option>
-                                    <option value="2">3-4</option>
-                                    <option value="3">5-6</option>
-                                    <option value="4">7-8</option>
+                                <select name="class" class="class">
+                                    <option value="1-2">1-2</option>
+                                    <option value="3-4">3-4</option>
+                                    <option value="5-6">5-6</option>
+                                    <option value="7-8">7-8</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <!--<label>学年</label>-->
-                                <select name="year">
-                                    <option value="1">2013-2014</option>
-                                    <option value="2">2014-2015</option>
-                                    <option value="3">2015-2016</option>
-                                    <option value="4">2016-2017</option>
+                                <select name="year" class="year">
+                                    <option value="2013-2014">2013-2014</option>
+                                    <option value="2014-2015">2014-2015</option>
+                                    <option value="2015-2016">2015-2016</option>
+                                    <option value="2016-2017">2016-2017</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <!--<label>学期</label>-->
-                                <select name="semester">
+                                <select name="semester" class="semester">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                 </select>
@@ -274,8 +275,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary submit">保存</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <input type="button" class="btn btn-primary submit" value="保存">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="关闭">
             </div>
         </div>
     </div>
@@ -286,6 +287,8 @@
 <script src="js/bootstrap-table-zh-CN.min.js"></script>
 <script src="js/bootstrap-table-export.js"></script>
 <script src="js/tableExport.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/jquery.serializejson.js"></script>
 <script type="text/javascript">
     $(function () {
         //1.初始化Table
@@ -302,9 +305,8 @@
         //初始化Table
         oTableInit.Init = function () {
             $('#table1').bootstrapTable({
-                url: "",
+                url: "paike.json",
                 method: 'post',
-                cache: false,//禁止缓存
                 dataType: "json",
                 toolbar: '#toolbar', // 工具按钮用哪个容器
                 striped: false,//禁止条纹显示
@@ -312,22 +314,25 @@
                 showColumns: true,  //显示隐藏列
                 minimumCountColumns: 2,          //最少允许的列数
                 showRefresh: true,  //显示刷新按钮
-                /* singleSelect: false, //复选框只能选择一条记录*!*/
+                singleSelect: false, //复选框只能选择一条记录*!*/
                 pagination: true, //分页
-                sidePagination: "server", //服务端处理分页
-                showPaginationSwitch: false,//是否显示分页数
+                //sidePagination: "server", //服务端处理分页
+               // showPaginationSwitch: false,//是否显示分页数
                 pageNumber: 1,   //初始化加载第一页，默认第一页
                 pageSize: 10,   //每页的记录行数（*）
                 pageList: [10, 20], //可供选择的每页的行数（*）
                 locale: 'zh-CN', //国际化
                 queryParams: oTableInit.queryParams,//传递参数（*）
                 queryParamsType: 'limit', //类型
-//        search:true,
+//              search:true,
                 showToggle : true,// 是否显示详细视图和列表视图的切换按钮
                 cardView :false, // 是否显示详细视图
                 showExport: true,                     //是否显示导出
                 exportDataType: "basic", //basic'导出当前页, 'all'导出全部, 'selected'导出选中项.
                 columns: [
+                    {
+                        checkbox: true
+                    },  
                     {
                         title: '系别',
                         field: 'xb',
@@ -368,6 +373,61 @@
         };
         return oTableInit;
     };
+    
+    $("#del").click(function () {
+        var rows= $('#table1').bootstrapTable('getSelections');
+        if (rows.length==0){
+            alert("请选择你要删除的信息!");
+            return;
+        }
+        var r=confirm("您确认要删掉这"+rows.length+"条课程信息吗？");
+        if(r){
+            for(var i=0;i<rows.length;i++){
+                $.ajax({
+                        type: 'delete',
+                        url:''+row[i]['xb']
+                    }
+                );
+            }
+            $("#table1").bootstrapTable('refresh');
+        }
+    });
+    
+  $(".submit").click(function(){
+	 /*  $(".row").each(function(){
+		  var jsondata1="";
+		  $(".row").find("input,select").each(function(){
+			  var name=$(this).attr("name");
+			 jsondata1+=name+":"+this.value+","; 
+		  });
+		  if(jsondata1.length != 1){                                  //如果取出了数据，删除多余的符号
+			  jsondata1 = jsondata1.substring(0, jsondata1.length-1); //删除多余的符号','
+		  }	
+		  //jsondata1+="},";
+		  jsondata1=JSON.stringify(jsondata1);
+		  jsondata+=jsondata1;
+	  });
+	  if(jsondata.length != 1){                                  //如果取出了数据，删除多余的符号
+		  jsondata = jsondata.substring(0, jsondata.length-1); //删除多余的符号','
+	  }	  */
+	  $.ajax({
+          type:"post",
+          url:"",
+          data:$("#pkInfo").serializeArray(),
+          //data:{},
+          dataType:"json",
+          success:function (result) {
+              if(result.errorMsg){
+                  alert(result.errorMsg);
+                  return;
+              }else{
+                  alert("保存成功！");
+                  $("#modal1").hide();
+                  $("#table1").bootstrapTable('refresh');
+              }
+          }
+      });
+  });  
 </script>
 </body>
 </html>

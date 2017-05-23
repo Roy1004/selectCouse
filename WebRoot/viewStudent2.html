@@ -23,11 +23,11 @@
                     <input type="text" name="grade" id="grade" class="input-sm col-md-2" placeholder="年级" autocomplete="off">
                     <input type="text" name="zymc" id="zymc" class="input-sm col-md-5" placeholder="专业名称" autocomplete="off">
                     <input type="text" name="bj" id="bj" class="input-sm col-md-2" placeholder="班级" autocomplete="off">
-                    <button class="btn btn-primary" id="search1"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                    <input type="button" class="btn btn-primary" id="search1" value="搜索">
                 </div>
                 <div class="right col-md-3">
                     <input type="text" name="sid" id="sid" class="col-md-6 input-sm" placeholder="学号" >
-                    <button class="btn btn-primary" id="search2"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                    <input type="button" class="btn btn-primary" id="search2" value="搜索">
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                     <div class="right col-md-12">
                         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal1" data-backdrop="static" id="add"><span class="glyphicon glyphicon-plus style"></span>添加</button>
                         <button class="btn btn-info btn-sm" data-toggle="modal" data-target="" data-backdrop="static" id="change"><span class="glyphicon glyphicon-pencil style"></span>修改</button>
-                        <button class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-trash style" id="del"></span>删除</button>
+                        <button class="btn btn-warning btn-sm" id="del"><span class="glyphicon glyphicon-trash style"></span>删除</button>
                     </div>
                 </div>
                 <!--</form>-->
@@ -59,25 +59,25 @@
                         <ul class="list-group">
                             <li class="list-group-item"><label class="col-md-3" for="sid1">学号</label><input type="text" name="sid" id="sid1"></li>
                             <li class="list-group-item"><label class="col-md-3" for="sname1">姓名</label><input type="text" name="sname" id="sname1"></li>
-                            <li class="list-group-item"><label class="col-md-3">性别</label><input type="radio" name="ssex" value="1">男&nbsp;<input type="radio" name="ssex" value="2">女</li>
+                            <li class="list-group-item"><label class="col-md-3">性别</label><input type="radio" name="ssex" value="男">男&nbsp;<input type="radio" name="ssex" value="女">女</li>
                             <li class="list-group-item">
                                 <label class="col-md-3" for="grade1">年级</label>
                                 <select class="form-control grade" name="grade" id="grade1">
-                                    <option value="1">2013</option>
-                                    <option value="2">2014</option>
-                                    <option value="3">2015</option>
-                                    <option value="4">2016</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
                                 </select>
                             </li>
                             <li class="list-group-item">
                                     <label class="col-md-3">系别</label>
                                     <select class="form-control xb" name="xb" id="xb1">
-                                        <option value="1">基础医学院</option>
-                                        <option value="2">药学院</option>
-                                        <option value="3">信息工程学院</option>
-                                        <option value="4">管理学院</option>
-                                        <option value="5">人文学院</option>
-                                        <option value="6">外国语学院</option>
+                                        <option value="基础医学院">基础医学院</option>
+                                    <option value="药学院">药学院</option>
+                                    <option value="信息工程学院">信息工程学院</option>
+                                    <option value="管理学院">管理学院</option>
+                                    <option value="人文学院">人文学院</option>
+                                    <option value="外国语学院">外国语学院</option>
                                     </select>
                             </li>
                             <li class="list-group-item"><label class="col-md-3">专业名称</label><input type="text" name="zymc" id="zymc1"></li>
@@ -87,8 +87,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="save1">保存</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <input type="button" class="btn btn-primary" id="save1" value="保存">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="关闭">
                 </div>
             </div>
         </div>
@@ -105,25 +105,25 @@
                         <ul class="list-group">
                             <li class="list-group-item"><label class="col-md-3">学号</label><input type="text" name="sid" id="sid2"></span></li>
                             <li class="list-group-item"><label class="col-md-3">姓名</label><input type="text" name="sname" id="sname2"></li>
-                            <li class="list-group-item"><label class="col-md-3">性别</label><input type="radio" name="ssex" value="1">男&nbsp;<input type="radio" name="ssex" value="2">女</li>
+                            <li class="list-group-item"><label class="col-md-3">性别</label><input type="radio" name="ssex" value="男">男&nbsp;<input type="radio" name="ssex" value="女">女</li>
                             <li class="list-group-item">
                                 <label class="col-md-3">年级</label>
                                 <select class="form-control grade" name="grade" id="grade2" >
-                                    <option value="1">2013</option>
-                                    <option value="2">2014</option>
-                                    <option value="3">2015</option>
-                                    <option value="4">2016</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
                                 </select>
                             </li>
                             <li class="list-group-item">
                                 <label class="col-md-3">系别</label>
                                 <select class="form-control xb"  name="xb" id="xb2">
-                                    <option value="1">基础医学院</option>
-                                    <option value="2">药学院</option>
-                                    <option value="3">信息工程学院</option>
-                                    <option value="4">管理学院</option>
-                                    <option value="5">人文学院</option>
-                                    <option value="6">外国语学院</option>
+                                    <option value="基础医学院">基础医学院</option>
+                                    <option value="药学院">药学院</option>
+                                    <option value="信息工程学院">信息工程学院</option>
+                                    <option value="管理学院">管理学院</option>
+                                    <option value="人文学院">人文学院</option>
+                                    <option value="外国语学院">外国语学院</option>
                                 </select>
                             </li>
                             <li class="list-group-item"><label class="col-md-3">专业名称</label><input type="text" name="zymc" id="zymc2"></li>
@@ -133,8 +133,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="save2">保存</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <input type="button" class="btn btn-primary" id="save2" value="保存">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="关闭">
                 </div>
             </div>
         </div>
@@ -148,35 +148,33 @@
 <script src="js/tableExport.js"></script>
 <script src="js/jquery.serializejson.js"></script>
 <script src="js/jquery.formautofill.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <script type="text/javascript">
     $(function () {
         //1.初始化Table
         var oTable = new TableInit();
         oTable.Init();
-
-        //2.初始化Button的点击事件
-        /* var oButtonInit = new ButtonInit();
-         oButtonInit.Init(); */
     });
+    
     $("#search1").click(function () {
-        if($('#grade').val()=="" || $('#zymc').val()==""  || $('#bj').val()=="" ){
+        if($("#grade").val()=="" || $("#zymc").val()==""  || $("#bj").val()=="" ){
             alert("请输入查询条件!");
         }else{
-            $('#table1').bootstrapTable('refresh');
+        	$("#table1").bootstrapTable('refresh');
         }
     });
     $("#search2").click(function () {
         if($('#sid').val()==""){
             alert("请输入查询条件!");
         }else{
-            $('#table1').bootstrapTable('refresh');
+            $("#table1").bootstrapTable('refresh');
         }
     });
 var TableInit = function () {
     var oTableInit = new Object();
     //初始化Table
     oTableInit.Init = function () {
-         $('#table1').bootstrapTable({
+         $("#table1").bootstrapTable({
             url: "person.json",
           //  method: 'post',
             cache: false,//禁止缓存
@@ -271,36 +269,22 @@ var TableInit = function () {
     };
     //删除学生信息
     $("#del").click(function () {
-        var rows= $('#table1').bootstrapTable('getSelections');
+        var rows= $("#table1").bootstrapTable('getSelections');
         if (rows.length==0){
             alert("请选择你要删除的学生!");
             return;
-        }
+        }else{
         var r=confirm("您确认要删掉这"+rows.length+"条学生信息吗？");
         if(r){
-            for(i=0;i<rows.length;i++){
+            for(var i=0;i<rows.length;i++){
                 $.ajax({
                         type: 'delete',
-                        url:'api/illInfo/'+row[i]['sid'],
+                        url:''+row[i]['sid'],
                     }
-                )
+                );
             }
-            $('#table1').bootstrapTable('refresh');
-           /* $.ajax(
-                {
-                    type:"DELETE",
-                    url:"",
-                    data:JSON.stringify(rows),
-                    success:function (reselt) {
-                        if(result.errorMsg){
-                            alert(result.errorMsg);
-                        }else{
-                           alert("您已成功删除<font color=red>"+selectedRows.length+"</font>条数据！");
-                            $('#table1').bootstrapTable('refresh');
-                        }
-                    }
-                }
-            )*/
+            $("#table1").bootstrapTable('refresh');
+         }
         }
     });
 //保存添加的学生信息
@@ -318,7 +302,7 @@ var TableInit = function () {
          $.ajax({
              type:"post",
              url:"",
-             data:JSON.stringify( $('#addInfo').serializeJSON()),
+             data:$('#addInfo').serializeJSON(),
              dataType:"json",
              success:function (result) {
                  if(result.errorMsg){
@@ -326,29 +310,38 @@ var TableInit = function () {
                      return;
                  }else{
                      alert("添加成功！");
-                     // $("#user-table").datagrid("reload");
+                     $("#modal1").modal('hide');
+                     $("#table1").bootstrapTable('refresh');
                  }
              }
-         })
+         });
      }
     });
     //修改学生信息
     $("#change").click(function () {
-        var rows = $('#table1').bootstrapTable('getSelections');
-       if(rows.length!=1){
+        var rows = $("#table1").bootstrapTable('getSelections');
+        if(rows.length!=1){
             alert("请选择一个学生!");
             $("#change").attr("data-target","");
             return;
         }else{
             $("#change").attr("data-target","#modal2");
-            formAutofll("updateInfo",rows[0]);
-        }
-    })
+            //formAutofll("#updateInfo",rows[0]);
+            $("#updateInfo").autofill(rows[0]);
+
+            var sexText=rows[0]["ssex"];
+            var gradeText=rows[0]["grade"];
+            var xbText=rows[0]["xb"];
+            $("input[type=radio][name='ssex'][value=sexText]").attr("checked",'checked');
+            $(".grade2").find("option[text=gradeText]").attr("selected",true);
+            $(".xb2").find("option[text=xbText]").attr("selected",true);
+        }  
+    });
     $("#save2").click(function () {
         $.ajax({
             type:"post",
             url:"",
-            data:JSON.stringify( $('#updateInfo').serializeJSON()),
+            data:$('#updateInfo').serializeJSON(),
             dataType:"json",
             success:function (result) {
                 if(result.errorMsg){
@@ -356,10 +349,11 @@ var TableInit = function () {
                     return;
                 }else{
                     alert("修改成功！");
-                    // $("#user-table").datagrid("reload");
+                    $("#modal2").modal('hide');
+                    $("#table1").bootstrapTable('refresh');
                 }
             }
-        })
+        });
     });
 </script>
 </body>

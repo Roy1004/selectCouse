@@ -15,8 +15,8 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="right col-md-4">
-                    <input type="text" name="id" id="id" class="input-sm col-md-6" placeholder="姓名" autocomplete="off">
-                    <button class="btn btn-primary" id="search"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                    <input type="text" name="username" id="username" class="input-sm col-md-6" placeholder="姓名" autocomplete="off">
+                    <input type="button" class="btn btn-primary" id="search" value="搜索">
                 </div>
             </div>
         </div>
@@ -30,16 +30,7 @@
                 </div>
                 <!--</form>-->
             </div>
-            <table class="table table-hover table-condensed" id="table1">
-                 <!-- <thead>
-                      <tr class="active">
-                          <th data-field="id">用户ID</th>
-                          <th data-field="name">姓名</th>
-                          <th data-field="message">留言内容</th>
-                          <th data-field="status">状态</th>
-                      </tr>
-                  </thead>-->
-            </table>
+            <table class="table table-hover table-condensed" id="table1"></table>
         </div>
     </div>
 </div>
@@ -49,6 +40,7 @@
 <script src="js/bootstrap-table-zh-CN.min.js"></script>
 <script src="js/bootstrap-table-export.js"></script>
 <script src="js/tableExport.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <script type="text/javascript">
     $(function () {
         //1.初始化Table
@@ -71,33 +63,33 @@
         //初始化Table
         oTableInit.Init = function () {
             $('#table1').bootstrapTable({
-                url: "",
-                method: 'post',
-                cache: false,//禁止缓存
+            url: "message.json",
+            method: 'get',
+            cache: false,//禁止缓存
                 /* showExport: true,//显示导出按钮
-        exportDataType: "basic",//导出类型*/
-        dataType: "json",
-        toolbar : '#toolbar', // 工具按钮用哪个容器
-        striped: false,//禁止条纹显示
-        clickToSelect: true, //点击行就选中
-        showColumns: true,  //显示隐藏列
-        minimumCountColumns: 2,          //最少允许的列数
-        showRefresh: true,  //显示刷新按钮
-       /* singleSelect: true, //复选框只能选择一条记录*/
-        pagination: true, //分页
-        sidePagination: "server", //服务端处理分页
-      /*  showPaginationSwitch: false,//是否显示分页数*/
-        pageNumber:1,   //初始化加载第一页，默认第一页
-        pageSize: 10,   //每页的记录行数（*）
-        pageList: [10, 20], //可供选择的每页的行数（*）
-        locale:'zh-CN', //国际化
-        queryParams: oTableInit.queryParams,//传递参数（*）
-        queryParamsType: 'limit', //类型
-//        search:true,
-        showToggle : true, // 是否显示详细视图和列表视图的切换按钮
-        cardView : false, // 是否显示详细视图
-        showExport: true,                     //是否显示导出
-        exportDataType: "basic", //basic'导出当前页, 'all'导出全部, 'selected'导出选中项.
+	        exportDataType: "basic",//导出类型*/
+	        dataType: "json",
+	        toolbar : '#toolbar', // 工具按钮用哪个容器
+	        striped: false,//禁止条纹显示
+	        clickToSelect: true, //点击行就选中
+	        showColumns: true,  //显示隐藏列
+	        minimumCountColumns: 2,          //最少允许的列数
+	        showRefresh: true,  //显示刷新按钮
+	       /* singleSelect: true, //复选框只能选择一条记录*/
+	        pagination: true, //分页
+	      //  sidePagination: "server", //服务端处理分页
+	      /*  showPaginationSwitch: false,//是否显示分页数*/
+	        pageNumber:1,   //初始化加载第一页，默认第一页
+	        pageSize: 10,   //每页的记录行数（*）
+	        pageList: [10, 20], //可供选择的每页的行数（*）
+	        locale:'zh-CN', //国际化
+	        queryParams: oTableInit.queryParams,//传递参数（*）
+	        queryParamsType: 'limit', //类型
+	//        search:true,
+	        showToggle : true, // 是否显示详细视图和列表视图的切换按钮
+	        cardView : false, // 是否显示详细视图
+	        showExport: true,                     //是否显示导出
+	        exportDataType: "basic", //basic'导出当前页, 'all'导出全部, 'selected'导出选中项.
         columns: [
             {   
                 checkbox:true
@@ -128,11 +120,11 @@
             },
           {
              title: '操作',
-             field: 'id',//id?
+             field: 'operation',
              align: 'center',
               valign: "middle",
              formatter: function(value, row, index){
-                 var e = '<a href="#" onclick="">设为已读</a> ';
+                 var e = '<a href="javascript:void(0)" class="deal">设为已读</a> ';
            /*  var d = '<a href="#" mce_href="#" onclick="del(\''+ row.id +'\')">删除</a> ';*/
              return e;
              }
@@ -161,16 +153,39 @@
         }
         var r=confirm("您确认要删掉这"+rows.length+"条留言吗？");
         if(r){
-            for(i=0;i<rows.length;i++){
+            for(var i=0;i<rows.length;i++){
                 $.ajax({
                         type: 'delete',
                         url:'api/illInfo/'+row[i]['id'],
                     }
-                )
+                );
             }
             $('#table1').bootstrapTable('refresh');
         }
     });
+   /*  $(".deal").click(function(value, row, index){
+    	$.ajax({
+    		type:"post",
+    		url:"",
+    		datatype:"json",
+    		data:JSON.stringify(row),
+    		success:function(data){
+    			alert("设置成功!");
+    		}
+    	});
+    }); */
+    window.operateEvents = {
+    	    'click .deal': function (value, row, index) {
+    	        $.ajax({
+    	            type: "post",
+    	            data: row,
+    	            url: '',
+    	            success: function (data) {
+    	                alert("设置成功");
+    	            }
+    	        });
+    	    }
+    };
 </script>
 </body>
 </html>

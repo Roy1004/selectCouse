@@ -17,9 +17,9 @@
         <div class="panel-body panel-body-nopadding">
             <form class="form-horizontal form-bordered" role="form" >
                 <ul class="list-group">
-                    <li class="list-group-item"><label>工号</label><span id="tid"></span></li>
-                    <li class="list-group-item"><label>姓名</label><span id="tname"></span></li>
-                    <li class="list-group-item"><label>性别</label><span id="tsex"></span></li>
+                    <li class="list-group-item"><label>工号</label><span id="tid">1002</span></li>
+                    <li class="list-group-item"><label>姓名</label><span id="tname">李四</span></li>
+                    <li class="list-group-item"><label>性别</label><span id="tsex">男</span></li>
                 </ul>
             </form>
         </div>
@@ -29,23 +29,23 @@
             <h3>留言板：</h3>
         </div>
         <div class="panel-body panel-body-nopadding">
-            <form class="form-horizontal form-bordered" role="form">
+            <form class="form-horizontal form-bordered" role="form" id="teaInfo">
                 <div class="form-group">
                     <label class="col-md-3 control-label">工号：</label>
                     <div class="col-md-4">
-                        <input type="text" placeholder="教师编号" class="form-control tid" autocomplete="off"/>
+                        <input type="text" placeholder="教师编号" name="tid" class="form-control tid" autocomplete="off"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">姓名：</label>
                     <div class="col-md-4">
-                        <input type="text" placeholder="姓名"  class="form-control tname" autocomplete="off"/>
+                        <input type="text" placeholder="姓名" name="tname" class="form-control tname" autocomplete="off"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="tmessage">留言：</label>
                     <div class="col-md-7">
-                        <textarea maxlength="200"  placeholder="最多输入200个字..." class="form-control tmessage" id="tmessage"  rows="5"></textarea>
+                        <textarea maxlength="200" name="message" placeholder="最多输入200个字..." class="form-control tmessage" id="tmessage"  rows="5"></textarea>
                     </div>
                 </div>
             </form>
@@ -53,8 +53,8 @@
         <div class="panel-footer">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <button class="btn btn-primary submit">提交</button>&nbsp;
-                    <button class="btn btn-default reset">重置</button>
+                    <input type="button" class="btn btn-primary submit" value="提交">&nbsp;
+                    <input type="button" class="btn btn-default reset" value="重置">
                 </div>
             </div>
         </div>
@@ -89,25 +89,22 @@
         var tmessage=$("#tmessage").val();
         if(tid=="" || tname=="" || tmessage=="")
         {alert("请将信息填写完整!");return false;}
-        $.ajax(
+        else{$.ajax(
             {
                 type:'post',
                 url:'',
                 dataType:'json',
-                data:{
-                    id:tid,
-                    name:tname,
-                    message:tmessage
-                },
+                data:$("#teaInfo").serialize(),
                 success:function (data) {
-                    if(data==1){
-                        alert("提交成功!");
-                    }else{
+                    if(data==undefined){
                         alert("提交失败!");
+                    }else{
+                        alert("提交成功!");
                     }
                 }
             }
         );
+         }
     });
 </script>
 </body>

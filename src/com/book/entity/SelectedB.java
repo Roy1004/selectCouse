@@ -7,29 +7,27 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- * SelectedB entity. @author MyEclipse Persistence Tools
- */
+
 @Entity
 @Table(name = "selected_b", catalog = "selectcourse")
 public class SelectedB implements java.io.Serializable {
 
-	// Fields
+
 
 	private SelectedBId id;
 
 	// Constructors
 
-	/** default constructor */
+
 	public SelectedB() {
 	}
 
-	/** full constructor */
+
 	public SelectedB(SelectedBId id) {
 		this.id = id;
 	}
 
-	// Property accessors
+
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "sid", column = @Column(name = "sid", nullable = false, length = 20)),

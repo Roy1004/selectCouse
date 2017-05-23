@@ -5,14 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * Teacher entity. @author MyEclipse Persistence Tools
- */
+
 @Entity
 @Table(name = "teacher", catalog = "selectcourse")
 public class Teacher implements java.io.Serializable {
 
-	// Fields
+
 
 	private String tid;
 	private String tname;
@@ -20,13 +18,13 @@ public class Teacher implements java.io.Serializable {
 	private String power;
 	private String tsex;
 
-	// Constructors
+	
 
-	/** default constructor */
+	
 	public Teacher() {
 	}
 
-	/** full constructor */
+	
 	public Teacher(String tid, String tname, String tpassword,
 			String power, String tsex) {
 		this.tid = tid;
@@ -36,7 +34,7 @@ public class Teacher implements java.io.Serializable {
 		this.tsex = tsex;
 	}
 
-	// Property accessors
+	
 	@Id
 	@Column(name = "tid", unique = true, nullable = false, length = 20)
 	public String getTid() {

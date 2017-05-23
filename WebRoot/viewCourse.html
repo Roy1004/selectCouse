@@ -21,11 +21,11 @@
                 <div class="row">
                     <div class="right col-md-3">
                         <input type="text" name="cid" id="cid" class="input-sm col-md-6" placeholder="课程号" autocomplete="off">
-                        <button class="btn btn-primary" id="search1"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                        <input type="button" class="btn btn-primary"id="search1" value="搜索">
                     </div>
                     <div class="right col-md-3">
                         <input type="text" name="cname" id="cname" class="col-md-6 input-sm" placeholder="课程名" autocomplete="off">
-                        <button class="btn btn-primary" id="search2"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                        <input type="button" class="btn btn-primary" id="search2" value="搜索">
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                         <div class="right col-md-12">
                             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal1" data-backdrop="static" id="add"><span class="glyphicon glyphicon-plus style"></span>添加</button>
                             <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal2" data-backdrop="static" id="change"><span class="glyphicon glyphicon-pencil style"></span>修改</button>
-                            <button class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-trash style" id="del"></span>删除</button>
+                            <button class="btn btn-warning btn-sm" id="del"><span class="glyphicon glyphicon-trash style"></span>删除</button>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                                         </li>
                                         <li class="list-group-item" style="display: inline;">
                                             <label>结课时间</label>
-                                            第<select class="form-control" name="end" id="end1">
+                                                                                                                    第<select class="form-control" name="end" id="end1">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -110,10 +110,10 @@
                                         <li class="list-group-item" style="display: inline;">
                                             <label>学年</label>
                                             <select class="form-control" name="year" id="year1">
-                                            <option value="1">2013-2014</option>
-                                            <option value="2">2014-2015</option>
-                                            <option value="3">2015-2016</option>
-                                            <option value="4">2016-2017</option>
+                                            <option value="2013-2014">2013-2014</option>
+                                            <option value="2014-2015">2014-2015</option>
+                                            <option value="2015-2016">2015-2016</option>
+                                            <option value="2016-2017">2016-2017</option>
                                             </select>
                                         </li>
                                         <li class="list-group-item" style="display: inline;">
@@ -129,9 +129,9 @@
                                 <li class="list-group-item">
                                     <label class="col-md-3">性别限制</label>
                                     <select class="form-control" name="xbxz" id="xbxz1">
-                                        <option value="1">无</option>
-                                        <option value="2">男</option>
-                                        <option value="3">女</option>
+                                        <option value="无">无</option>
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
                                     </select>
                                 </li>
                                 <li class="list-group-item">
@@ -142,8 +142,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="save1">保存</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="button" class="btn btn-primary" id="save1" value="保存">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="关闭">
                     </div>
                 </div>
             </div>
@@ -216,10 +216,10 @@
                                         <li class="list-group-item" style="display: inline;">
                                             <label>学年</label>
                                             <select class="form-control" name="year" id="year2">
-                                                <option value="1">2013-2014</option>
-                                                <option value="2">2014-2015</option>
-                                                <option value="3">2015-2016</option>
-                                                <option value="4">2016-2017</option>
+                                                <option value="2013-2014">2013-2014</option>
+                                                <option value="2014-2015">2014-2015</option>
+                                                <option value="2015-2016">2015-2016</option>
+                                                <option value="2016-2017">2016-2017</option>
                                             </select>
                                         </li>
                                         <li class="list-group-item" style="display: inline;">
@@ -235,9 +235,9 @@
                                 <li class="list-group-item">
                                     <label class="col-md-3">性别限制</label>
                                     <select class="form-control" name="xbxz" id="xbxz2">
-                                        <option value="1">无</option>
-                                        <option value="2">男</option>
-                                        <option value="3">女</option>
+                                        <option value="无">无</option>
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
                                     </select>
                                 </li>
                                 <li class="list-group-item">
@@ -248,8 +248,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="save2">保存</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <input type="button" class="btn btn-primary" id="save2" value="保存">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="关闭">
                     </div>
                 </div>
             </div>
@@ -264,6 +264,7 @@
     <script src="js/jquery.serializejson.js"></script>
     <script src="js/jquery.formautofill.min.js"></script>
     <script src="js/public.js"></script>
+    <script src="js/jquery.cookie.js"></script>
     <script type="text/javascript">
         $(function () {
             //1.初始化Table
@@ -278,14 +279,14 @@
             if($('#cid').val()==""){
                 alert("请输入查询条件!");
             }else{
-                $('#table1').bootstrapTable('refresh');
+                $("#table1").bootstrapTable('refresh');
             }
         });
         $("#search2").click(function () {
             if($('#cname').val()==""){
                 alert("请输入查询条件!");
             }else{
-                $('#table1').bootstrapTable('refresh');
+            	$("#table1").bootstrapTable('refresh');
             }
         });
         var TableInit = function () {
@@ -293,7 +294,7 @@
             //初始化Table
             oTableInit.Init = function () {
                 $('#table1').bootstrapTable({
-                    url: "",
+                    url: "baseCourse.json",
                     method: 'post',
                     cache: false,//禁止缓存
                     dataType: "json",
@@ -303,9 +304,9 @@
                     showColumns: true,  //显示隐藏列
                     minimumCountColumns: 2,          //最少允许的列数
                     showRefresh: true,  //显示刷新按钮
-                   /* singleSelect: false, //复选框只能选择一条记录*!*/
+                    singleSelect: true, //复选框只能选择一条记录*!*/
                     pagination: true, //分页
-                    sidePagination: "server", //服务端处理分页
+                   // sidePagination: "server", //服务端处理分页
                     showPaginationSwitch: false,//是否显示分页数
                     pageNumber: 1,   //初始化加载第一页，默认第一页
                     pageSize: 10,   //每页的记录行数（*）
@@ -313,7 +314,6 @@
                     locale: 'zh-CN', //国际化
                     queryParams: oTableInit.queryParams,//传递参数（*）
                     queryParamsType: 'limit', //类型
-//        search:true,
                    showToggle : true,// 是否显示详细视图和列表视图的切换按钮
                    cardView :false, // 是否显示详细视图
                     showExport: true,                     //是否显示导出
@@ -342,12 +342,12 @@
                         align: 'center'
                     },
                     {
-                        title: '开课时间',
+                        title: '开课时间(周)',
                         field: 'start',
                         align: 'center'
                     },
                     {
-                        title: '结课时间',
+                        title: '结课时间(周)',
                         field: 'end',
                         align: 'center'
                     },
@@ -392,14 +392,14 @@
             }
             var r=confirm("您确认要删掉这"+rows.length+"条课程信息吗？");
             if(r){
-                for(i=0;i<rows.length;i++){
+                for(var i=0;i<rows.length;i++){
                     $.ajax({
                             type: 'delete',
-                            url:'api/illInfo/'+row[i]['cid']
+                            url:''+row[i]['cid']
                         }
-                    )
+                    );
                 }
-                $('#table1').bootstrapTable('refresh');
+                $("#table1").bootstrapTable('refresh');
             }
         });
         //保存课程信息
@@ -409,14 +409,14 @@
             var total=$("#total1").val();
             var place=$("#place1").val();
             var tname=$("#tname1").val();
-            if(cid=="" || cname=="" || total=="" || place=="" || bj=="" || tname==""){
+            if(cid=="" || cname=="" || total=="" || place=="" || tname==""){
                 alert("信息填写不完整!");
                 return;
             }else{
                 $.ajax({
                     type:"post",
                     url:"",
-                    data:JSON.stringify( $('#addInfo').serializeJSON()),
+                    data:$('#addInfo').serializeJSON(),
                     dataType:"json",
                     success:function (result) {
                         if(result.errorMsg){
@@ -425,10 +425,10 @@
                         }else{
                             alert("添加成功！");
                             $("#modal1").hide();
-                            $('#table1').bootstrapTable('refresh');
+                            $("#table1").bootstrapTable('refresh');
                         }
                     }
-                })
+                });
             }
         });
         //修改课程信息
@@ -440,24 +440,28 @@
                 return;
             }else{
                 $("#change").attr("data-target","#modal2");
+                $("#updateInfo").autofill(rows[0]);
+                var xbxzText=rows[0]["xbxz"];
+                $("#xbxz").find("option[text=xbxzText]").attr("selected",true);
                 $.ajax({
                     type:"get",
-                    url:''+rows[0]["cid"],
+                    url:"adminCourse.json",
                     datatype:'json',
                     success:function (data) {
-                        formAutofll("updateInfo",rows[0]);
-                        $("#tname2").val(data[0].tname);
-                       //????
+                       $("#tname2").val(data["tname"]);
+                        var yearText=data["year"];
+                        var semesterText=data["semester"];
+                        $("#year2").find("option[text=yearText]").attr("selected",true);
+                        $("#semester").find("option[text=xbText]").attr("selected",true);
                     }
                 });
             }
         });
         $("#save2").click(function () {
-            var rows = $('#table1').bootstrapTable('getSelections');
             $.ajax({
                 type:"post",
                 url:"",
-                data:JSON.stringify( $('#updateInfo').serializeJSON()),
+                data:$('#updateInfo').serializeJSON(),
                 dataType:"json",
                 success:function (result) {
                     if(result.errorMsg){
@@ -466,11 +470,11 @@
                     }else{
                         alert("修改成功！");
                         $("#modal2").hide();
-                        $('#table1').bootstrapTable('refresh');
+                        $("#table1").bootstrapTable('refresh');
                     }
                 }
-            })
-        })
+            });
+        });
     </script>
 </body>
 </html>

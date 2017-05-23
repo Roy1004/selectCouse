@@ -3,33 +3,29 @@ package com.book.entity;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-/**
- * MessageId entity. @author MyEclipse Persistence Tools
- */
+
 @Embeddable
 public class MessageId implements java.io.Serializable {
 
-	// Fields
+	
 
 	private String id;
 	private String name;
 	private String message;
 	private String status;
 
-	// Constructors
-
-	/** default constructor */
+	
 	public MessageId() {
 	}
 
-	/** minimal constructor */
+	
 	public MessageId(String name, String message, String status) {
 		this.name = name;
 		this.message = message;
 		this.status = status;
 	}
 
-	/** full constructor */
+	
 	public MessageId(String id, String name, String message, String status) {
 		this.id = id;
 		this.name = name;
@@ -37,7 +33,7 @@ public class MessageId implements java.io.Serializable {
 		this.status = status;
 	}
 
-	// Property accessors
+	
 
 	@Column(name = "id", length = 20)
 	public String getId() {

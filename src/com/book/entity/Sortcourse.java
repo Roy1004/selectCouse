@@ -7,9 +7,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- * Sortcourse entity. @author MyEclipse Persistence Tools
- */
+
 @Entity
 @Table(name = "sortcourse", catalog = "selectcourse")
 public class Sortcourse implements java.io.Serializable {
@@ -18,18 +16,18 @@ public class Sortcourse implements java.io.Serializable {
 
 	private SortcourseId id;
 
-	// Constructors
 
-	/** default constructor */
+
+
 	public Sortcourse() {
 	}
 
-	/** full constructor */
+
 	public Sortcourse(SortcourseId id) {
 		this.id = id;
 	}
 
-	// Property accessors
+
 	@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "xb", column = @Column(name = "xb", nullable = false, length = 20)),

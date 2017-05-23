@@ -3,13 +3,11 @@ package com.book.entity;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-/**
- * SelectedBId entity. @author MyEclipse Persistence Tools
- */
+
 @Embeddable
 public class SelectedBId implements java.io.Serializable {
 
-	// Fields
+	
 
 	private String sid;
 	private String sname;
@@ -21,13 +19,13 @@ public class SelectedBId implements java.io.Serializable {
 	private String year;
 	private String semester;
 
-	// Constructors
+	
 
-	/** default constructor */
+
 	public SelectedBId() {
 	}
 
-	/** minimal constructor */
+
 	public SelectedBId(String sid, String sname, String cid, String cname,
 			String ctime, String tid, String year, String semester) {
 		this.sid = sid;
@@ -40,7 +38,7 @@ public class SelectedBId implements java.io.Serializable {
 		this.semester = semester;
 	}
 
-	/** full constructor */
+	
 	public SelectedBId(String sid, String sname, String cid, String cname,
 			String ctime, String tid, Integer mark2, String year,
 			String semester) {
@@ -55,7 +53,7 @@ public class SelectedBId implements java.io.Serializable {
 		this.semester = semester;
 	}
 
-	// Property accessors
+
 
 	@Column(name = "sid", nullable = false, length = 20)
 	public String getSid() {

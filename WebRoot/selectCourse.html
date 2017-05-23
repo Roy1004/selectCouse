@@ -19,21 +19,21 @@
                 <div class="row">
                     <div class="right col-md-6">
                         <input type="text" name="tname" id="tname" class="input-sm col-md-6" placeholder="教师姓名" autocomplete="off">
-                        <button class="btn btn-primary" id="search1"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                        <input type="button" class="btn btn-primary" id="search1"  value="搜索">
                     </div>
                     <div class="right col-md-6">
                         <input type="text" name="cname" id="cname" class="input-sm col-md-6" placeholder="课程名称" autocomplete="off">
-                        <button class="btn btn-primary" id="search2"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                        <input type="button" class="btn btn-primary" id="search2" value="搜索">
                     </div>
                 </div>
                 <!--</form>-->
             </div>
             <table class="table table-hover table-condensed table-no-bordered" id="table1"></table>
-            <button class="btn btn-default btn-sm" id="save">提交</button>
+            <input type="button" class="btn btn-default btn-sm" id="save" value="提交">
             <div class="mb30"></div>
             <p>查看已选课程</p>
             <table class="table table-hover table-condensed table-no-bordered" id="table2"></table>
-            <button class="btn btn-default btn-sm" id="del">退课</button>
+            <input type="button" class="btn btn-default btn-sm" id="del" value="退课">
         </div>
     </div>
 </div>
@@ -41,14 +41,11 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-table.min.js"></script>
 <script src="js/bootstrap-table-zh-CN.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <script type="text/javascript">
     $(function () {
-        //1.初始化Table
         var oTable = new TableInit();
         oTable.Init();
-        //2.初始化Button的点击事件
-        /* var oButtonInit = new ButtonInit();
-         oButtonInit.Init(); */
     });
 
     $("#search1").click(function () {
@@ -71,7 +68,7 @@
         oTableInit.Init = function () {
 
             $('#table1').bootstrapTable({
-                url: '',
+                url:"Course.json",
                 method: 'post',
                 cache: false,//禁止缓存
                 dataType: "json",
@@ -83,7 +80,7 @@
                 showRefresh: true,  //显示刷新按钮
                 singleSelect: true, //复选框只能选择一条记录
                 pagination: true, //分页
-                sidePagination: "server", //服务端处理分页
+              //  sidePagination: "server", //服务端处理分页
                 pageNumber: 1,   //初始化加载第一页，默认第一页
                 pageSize: 10,   //每页的记录行数（*）
                 pageList: [10, 20], //可供选择的每页的行数（*）
@@ -114,17 +111,17 @@
                 align: 'center'
             },
             {
-                title: '开课时间',
+                title: '开课时间(周)',
                 field: 'start',
                 align: 'center'
             },
             {
-                title: '结课时间',
+                title: '结课时间(周)',
                 field: 'end',
                 align: 'center'
             },
             {
-                title: '上课时间',
+                title: '上课时间(节)',
                 field: 'ctime',
                 align: 'center'
             },
@@ -151,9 +148,8 @@
          ]
    });
    $('#table2').bootstrapTable({
-        url: "",
+        url: "hasselect.json",
         method: 'post',
-        cache: false,//禁止缓存
         dataType: "json",
         striped: false,//禁止条纹显示
         clickToSelect: true, //点击行就选中
@@ -162,7 +158,7 @@
         minimumCountColumns: 2,          //最少允许的列数
         showRefresh: true,  //显示刷新按钮
         pagination: true, //分页
-        sidePagination: "server", //服务端处理分页
+     //   sidePagination: "server", //服务端处理分页
         pageNumber:1,   //初始化加载第一页，默认第一页
         pageSize: 10,   //每页的记录行数（*）
         pageList: [10, 20],
@@ -230,7 +226,7 @@
         };
         return oTableInit;
     };
-  $("#sava").click(function () {
+  $("#save").click(function () {
        Save();
       $('#table1').bootstrapTable('refresh');
       $('#table2').bootstrapTable('refresh');
@@ -241,36 +237,35 @@
         $('#table2').bootstrapTable('refresh');
     });
     function Save() {
-        var row=$("#table1").bootstrapTable("getSelections");
-        if(row.length!=1){
-            alert("请选课一门课程!")
+        var rows=$("#table1").bootstrapTable("getSelections");
+        if(rows.length!=1){
+            alert("请选课一门课程!");
         }else{
             $.ajax({
                 type:"post",
                 url:"",
-                data:JSON.stringify(row),
+                data:JSON.stringify(rows),
                 success:function (result) {
                     if(result.errorMsg){
                         alert(result.errorMsg);
                         return;
                     }else{
-                       alert("保存成功！");
-                       // $("#user-table").datagrid("reload");
+                       alert("选课成功！");
                     }
                 }
-            })
+            });
         }
     }
     function Del() {
-        var row = $('#table2').bootstrapTable('getSelections');
-        if(row.length!=1){
+        var rows = $('#table2').bootstrapTable('getSelections');
+        if(rows.length!=1){
             alert("请选择一条记录");
         }
         else{
             $.ajax({
-                type:"DELETE",
+                type:"POST",
                 url:'',
-                data:JSON.stringify(row),
+                data:JSON.stringify(rows),
                 dataType: 'json',
                 success:function(result) {
                     if (result.errorMsg) {
@@ -280,7 +275,7 @@
                       alert("退课成功！");
                     }
                 }
-            })
+            });
         }
     }
 </script>

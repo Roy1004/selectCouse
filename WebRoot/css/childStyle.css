@@ -9,3 +9,4 @@ body{ background: #e4e7ea;margin: 0;padding: 0;}
 .panel .style{ color: #93a1a1;padding-right: 5px;}
 .prompt{font-size: 12px;}
 .ml10{margin-left: 0;}
+input{outline:none;}

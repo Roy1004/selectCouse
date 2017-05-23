@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="right col-md-4">
                     <input type="text" name="tid" id="tid" class="col-md-6 input-sm" placeholder="工号" autocomplete="off">
-                    <button class="btn btn-primary" id="search"><span class="glyphicon glyphicon-search style"></span>搜索</button>
+                    <input type="button" class="btn btn-primary" id="search" value="搜索">
                 </div>
             </div>
         </div>
@@ -77,16 +77,16 @@
                         <ul class="list-group">
                             <li class="list-group-item"><label class="col-md-3">工号</label><input type="text" name="tid" id="tid2"></li>
                             <li class="list-group-item"><label class="col-md-3">姓名</label><input type="text" name="tname" id="tname2"></li>
-                            <li class="list-group-item"><label class="col-md-3">性别</label><input type="radio" name="tsex" value="0">男&nbsp;<input type="radio" name="tsex" value="1">女</li>
-                            <li class="list-group-item"><label class="col-md-3">所授课程名称</label><input type="text" name="sklb" id="sklb2"></li>
-                            <li class="list-group-item"><label class="col-md-3">权限</label><input type="text" name="" id="power2"></li>
+                            <li class="list-group-item"><label class="col-md-3">性别</label><input type="radio" name="tsex" value="男">男&nbsp;<input type="radio" name="tsex" value="女">女</li>
+                            <li class="list-group-item"><label class="col-md-3">所授课程名称</label><input type="text" name="cname" id="cname2"></li>
+                            <li class="list-group-item"><label class="col-md-3">权限</label><input type="text" name="power" id="power2"></li>
                             <li class="list-group-item"><label class="col-md-3">密码</label><input type="text" name="tpassword" id="tpassword2"></li>
                         </ul>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="save2">保存</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <input type="button" class="btn btn-primary" id="save2" value="保存">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="关闭">
                 </div>
             </div>
         </div>
@@ -100,6 +100,7 @@
 <script src="js/tableExport.js"></script>
 <script src="js/jquery.serializejson.js"></script>
 <script src="js/jquery.formautofill.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <script type="text/javascript">
    $(function () {
        //1.初始化Table
@@ -123,7 +124,7 @@
        //初始化Table
        oTableInit.Init = function () {
            $('#table1').bootstrapTable({
-               url: "",
+               url: "tea.json",
                method: 'post',
                cache: false,//禁止缓存
                dataType: "json",
@@ -135,7 +136,7 @@
                showRefresh: true,  //显示刷新按钮
                /* singleSelect: false, //复选框只能选择一条记录*/
                pagination: true, //分页
-               sidePagination: "server", //服务端处理分页
+              // sidePagination: "server", //服务端处理分页
                /* showPaginationSwitch: false,//是否显示分页数*/
                pageNumber: 1,   //初始化加载第一页，默认第一页
                pageSize: 10,   //每页的记录行数（*）
@@ -173,7 +174,7 @@
             },
             {
                 title: '所教课程名称',
-                field: 'sklb',
+                field: 'cname',
                 align: 'center'
             },
             {
@@ -209,14 +210,14 @@
         var sklb=$("#sklb1").val();
         var power=$("#power1").val();
         var tpassword=$("#tpassword1").val();
-        if(tid=="" || tname=="" || tsex==null || sklb=="" || bj=="" || power=="" || tpassword==""){
+        if(tid=="" || tname=="" || tsex==null || sklb==""|| power=="" || tpassword==""){
             alert("信息填写不完整!");
             return;
         }else{
             $.ajax({
                 type:"post",
                 url:"",
-                data:JSON.stringify( $('#addInfo').serializeJSON()),
+                data:$('#addInfo').serializeJSON(),
                 dataType:"json",
                 success:function (result) {
                     if(result.errorMsg){
@@ -224,11 +225,11 @@
                         return;
                     }else{
                         alert("添加成功！");
-                        $("#modal2").hide();
-                        $('#table1').bootstrapTable('refresh');
+                        $("#modal1").modal('hide');
+                        $("#table1").bootstrapTable('refresh');
                     }
                 }
-            })
+            });
         }
     });
    $("#del").click(function () {
@@ -236,50 +237,38 @@
        if (rows.length==0){
            alert("请选择你要删除的学生!");
            return;
-       }
+       }else{
        var r=confirm("您确认要删掉这"+rows.length+"条教师信息吗？");
        if(r){
-           for(i=0;i<rows.length;i++){
+           for(var i=0;i<rows.length;i++){
                $.ajax({
                        type: 'delete',
-                       url:'api/illInfo/'+row[i]['tid'],
+                       url:''+row[i]['tid'],
                    }
-               )
+               );
            };
-           $('#table1').bootstrapTable('refresh');
-           /* $.ajax(
-            {
-            type:"DELETE",
-            url:"",
-            data:JSON.stringify(rows),
-            success:function (reselt) {
-            if(result.errorMsg){
-            alert(result.errorMsg);
-            }else{
-            alert("您已成功删除<font color=red>"+selectedRows.length+"</font>条数据！");
-            $('#table1').bootstrapTable('refresh');
-            }
-            }
-            }
-            )*/
+           $("#table1").bootstrapTable('refresh');
+        }
        }
    });
    $("#change").click(function () {
        var rows = $('#table1').bootstrapTable('getSelections');
        if(rows.length!=1){
            alert("请选择一个教师!");
-           $("#change").attr("data-target","")
+           $("#change").attr("data-target","");
            return;
        }else{
-           $("#change").attr("data-target","#modal2")
-           formAutofll("updateInfo",rows[0]);
+           $("#change").attr("data-target","#modal2");
+          $("#updateInfo").autofill(rows[0]);
+          var sexText=rows[0]["tsex"];
+          $("input[type=radio][name='tsex'][value=sexText]").attr("checked",'checked');
        }
-   })
+   });
    $("#save2").click(function () {
        $.ajax({
            type:"post",
            url:"",
-           data:JSON.stringify( $('#updateInfo').serializeJSON()),
+           data:$('#updateInfo').serializeJSON(),
            dataType:"json",
            success:function (result) {
                if(result.errorMsg){
@@ -287,11 +276,11 @@
                    return;
                }else{
                    alert("修改成功！");
-                   $("#modal2").hide();
-                   $('#table1').bootstrapTable('refresh');
+                   $("#modal2").modal('hide');
+                   $("#table1").bootstrapTable('refresh');
                }
            }
-       })
+       });
    });
 </script>
 </body>
